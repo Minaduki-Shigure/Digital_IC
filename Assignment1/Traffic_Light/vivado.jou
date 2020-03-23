@@ -1,0 +1,18 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Mon Mar 23 13:08:26 2020
+# Process ID: 16608
+# Current directory: C:/Users/Player/Digital_IC/Assignment1/Traffic_Light
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9840 C:\Users\Player\Digital_IC\Assignment1\Traffic_Light\Traffic_Light.xpr
+# Log file: C:/Users/Player/Digital_IC/Assignment1/Traffic_Light/vivado.log
+# Journal file: C:/Users/Player/Digital_IC/Assignment1/Traffic_Light\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Player/Digital_IC/Assignment1/Traffic_Light/Traffic_Light.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+open_wave_config C:/Users/Player/Digital_IC/Assignment1/Traffic_Light/traffic_light_tb_behav.wcfg
+source traffic_light_tb.tcl
+close_sim
