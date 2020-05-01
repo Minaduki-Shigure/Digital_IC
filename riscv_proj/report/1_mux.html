@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>实验一 多路选择器</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h1 id="%e5%ae%9e%e9%aa%8c%e4%b8%80-%e5%a4%9a%e8%b7%af%e9%80%89%e6%8b%a9%e5%99%a8">实验一 多路选择器</h1>
+<p>Copyright (c) 2020 Minaduki Shigure.<br>
+专业：电子科学与技术<br>
+学号：171180571<br>
+姓名：吴康正</p>
+<h2 id="%e5%ae%9e%e9%aa%8c%e6%ba%90%e7%a0%81">实验源码</h2>
+<p>使用一个简单的assign语句与条件运算符完成。</p>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> scale_mux(out, a, b, sel);
+
+    <span class="hljs-keyword">parameter</span> size = <span class="hljs-number">1</span>;
+
+    <span class="hljs-keyword">output</span> [size-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] out;
+    <span class="hljs-keyword">input</span> [size-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] a, b;
+    <span class="hljs-keyword">input</span> sel;
+
+    <span class="hljs-keyword">assign</span> out = sel ? b : a;
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h2 id="%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81">测试代码</h2>
+<p>测试时定义mux宽度为5位进行验证。</p>
+<pre><code class="language-v"><div><span class="hljs-meta">`<span class="hljs-meta-keyword">define</span> width 5</span>
+<span class="hljs-meta">`<span class="hljs-meta-keyword">timescale</span> 1ns / 1ns</span>
+<span class="hljs-keyword">module</span> scale_test;
+
+    <span class="hljs-keyword">reg</span>  [<span class="hljs-meta">`width:1] a, b;</span>
+    <span class="hljs-keyword">wire</span> [<span class="hljs-meta">`width:1] out;</span>
+    <span class="hljs-keyword">reg</span> sel;
+
+<span class="hljs-comment">// Instantiate the mux.  </span>
+
+    scale_mux <span class="hljs-variable">#(`width) m1(.out(out), .a(a), .b(b), .sel(sel))</span>; 
+
+    <span class="hljs-keyword">initial</span>
+      <span class="hljs-keyword">begin</span> 
+	<span class="hljs-comment">//  Display results to the screen</span>
+        <span class="hljs-built_in">$monitorb</span>(<span class="hljs-string">"%d out=%b a=%b b=%b sel=%b"</span>,<span class="hljs-built_in">$time</span>,out,a,b,sel);
+	<span class="hljs-comment">//  Provide stimulus for the design</span>
+        #<span class="hljs-number">10</span> a = <span class="hljs-number">5'b00001</span>;
+        b = <span class="hljs-number">5'b10001</span>;
+         
+	<span class="hljs-comment">// Initialize (select a)</span>
+        #<span class="hljs-number">10</span> sel = <span class="hljs-number">0</span>;
+	<span class="hljs-comment">// Change the values of a and b (out still equals a)	 </span>
+        #<span class="hljs-number">10</span> a = <span class="hljs-number">5'b11111</span>;
+        b = <span class="hljs-number">5'b10101</span>;
+	<span class="hljs-comment">// Change the value of sel (select b)</span>
+        #<span class="hljs-number">10</span> sel = <span class="hljs-number">1</span>;
+	<span class="hljs-comment">// Change the values of a and b (out still equals b)</span>
+        #<span class="hljs-number">10</span> a = <span class="hljs-number">5'b11111</span>;
+        b = <span class="hljs-number">5'b10101</span>;	      
+ 	    
+        #<span class="hljs-number">100</span> <span class="hljs-built_in">$finish</span>;
+      <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h2 id="%e6%b5%8b%e8%af%95%e7%bb%93%e6%9e%9c">测试结果</h2>
+<pre><code class="language-plain"><code><div>#                    0 out=xxxxx a=xxxxx b=xxxxx sel=x
+#                   10 out=x0001 a=00001 b=10001 sel=x
+#                   20 out=00001 a=00001 b=10001 sel=0
+#                   30 out=11111 a=11111 b=10101 sel=0
+#                   40 out=10101 a=11111 b=10101 sel=1
+</div></code></code></pre>
+<p><img src="file:///c:\Users\Player\Digital_IC\riscv_proj\report\pic\1-1.png" alt="时序图"></p>
+<p>测试结果表明，模块设计正确，模块工作正常。</p>
+
+    </body>
+    </html>

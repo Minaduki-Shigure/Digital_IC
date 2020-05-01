@@ -26,12 +26,15 @@ module counter(
     input rst,
     input [4:0] data,
     output reg [4:0] cnt
-)
+);
+
     always @ (posedge clk, rst)
     begin
         if (!rst)
         begin
-            cnt <= #3 0;
+            // 使用非阻塞赋值会导致reset时可能出现混乱
+            cnt = #3 0;
+            //cnt <= #3 0;
         end
         else
         begin
@@ -39,11 +42,13 @@ module counter(
             begin
                 if (load)
                 begin
-                    cnt <= #3 data;
+                    cnt = #3 data;
+                    //cnt <= #3 data;
                 end
                 else
                 begin
-                    cnt <= #4 cnt + 1;
+                    cnt = #4 cnt + 1;
+                    //cnt <= #4 cnt + 1;
                 end
             end
         end

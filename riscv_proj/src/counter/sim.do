@@ -5,6 +5,6 @@ vmap work work
 vlog counter_tb.v
 vlog counter.v
 vlog clock.v
-vsim  -novopt test
-add wave -r sim:/test/cnt1/*
+vsim  -novopt counter_tb
+add wave -r sim:/counter_tb/cnt1/*
 run -all

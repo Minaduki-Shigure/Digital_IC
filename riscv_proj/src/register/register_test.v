@@ -24,7 +24,7 @@ module test;
     initial 
     begin
 	// initialize inputs
-        data = 8'1; ena = 0;
+        data = 8'b1; ena = 0;
 
 	// Output should be unknown
         #15 ena = 1; rst = 1;
@@ -34,7 +34,11 @@ module test;
                     // test that enable works
         #15 ena = 1;
         #15 data = 8'b10;
-        #15 data = 8'b11;
+        #20 data = 8'b11;
+        #20 data = 8'b101;
+        #20 data = 8'b1001;
+        #20 data = 8'b110;
+        #20 data = 8'b1;
         #15 ena = 0;
                       // Output should be clocked from data
         #15 data = 8'b1111;

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>实验三 计数器</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h1 id="%e5%ae%9e%e9%aa%8c%e4%b8%89-%e8%ae%a1%e6%95%b0%e5%99%a8">实验三 计数器</h1>
+<p>Copyright (c) 2020 Minaduki Shigure.<br>
+专业：电子科学与技术<br>
+学号：171180571<br>
+姓名：吴康正</p>
+<h2 id="%e5%ae%9e%e9%aa%8c%e6%ba%90%e7%a0%81">实验源码</h2>
+<p>这里在always块中没有使用非阻塞赋值，因为如果同时使用非阻塞赋值和延时赋值，可能会造成reset和load时产生混乱。</p>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> counter(
+    <span class="hljs-keyword">input</span> clk,
+    <span class="hljs-keyword">input</span> load,
+    <span class="hljs-keyword">input</span> rst,
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">4</span>:<span class="hljs-number">0</span>] data,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">4</span>:<span class="hljs-number">0</span>] cnt
+);
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> clk, rst)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (!rst)
+        <span class="hljs-keyword">begin</span>
+            <span class="hljs-comment">// 使用非阻塞赋值会导致reset时可能出现混乱</span>
+            cnt = #<span class="hljs-number">3</span> <span class="hljs-number">0</span>;
+            <span class="hljs-comment">//cnt &lt;= #3 0;</span>
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            <span class="hljs-keyword">if</span> (clk)
+            <span class="hljs-keyword">begin</span>
+                <span class="hljs-keyword">if</span> (load)
+                <span class="hljs-keyword">begin</span>
+                    cnt = #<span class="hljs-number">3</span> data;
+                    <span class="hljs-comment">//cnt &lt;= #3 data;</span>
+                <span class="hljs-keyword">end</span>
+                <span class="hljs-keyword">else</span>
+                <span class="hljs-keyword">begin</span>
+                    cnt = #<span class="hljs-number">4</span> cnt + <span class="hljs-number">1</span>;
+                    <span class="hljs-comment">//cnt &lt;= #4 cnt + 1;</span>
+                <span class="hljs-keyword">end</span>
+            <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h2 id="%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81">测试代码</h2>
+<p>先后测试了正常计数、复位、置位功能。</p>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> counter_tb;
+    <span class="hljs-keyword">wire</span> clk;
+    <span class="hljs-keyword">reg</span> load, rst;
+    <span class="hljs-keyword">reg</span> [<span class="hljs-number">4</span>:<span class="hljs-number">0</span>] data;
+    <span class="hljs-keyword">wire</span> [<span class="hljs-number">4</span>:<span class="hljs-number">0</span>] cnt;
+
+    clock c1 (clk);
+    counter cnt1 (<span class="hljs-variable">.clk</span>(clk), <span class="hljs-variable">.load</span>(load), <span class="hljs-variable">.rst</span>(rst), <span class="hljs-variable">.data</span>(data), <span class="hljs-variable">.cnt</span>(cnt));
+
+    <span class="hljs-keyword">initial</span>
+    <span class="hljs-keyword">begin</span>
+        load = <span class="hljs-number">0</span>; data = <span class="hljs-number">0</span>; rst = <span class="hljs-number">0</span>;
+        #<span class="hljs-number">30</span> rst = <span class="hljs-number">1</span>;
+        #<span class="hljs-number">300</span> rst = <span class="hljs-number">0</span>;
+        #<span class="hljs-number">30</span> rst = <span class="hljs-number">1</span>;
+        #<span class="hljs-number">200</span> data = <span class="hljs-number">10</span>;
+        #<span class="hljs-number">30</span> load = <span class="hljs-number">1</span>;
+        #<span class="hljs-number">30</span> load = <span class="hljs-number">0</span>;
+        #<span class="hljs-number">500</span> <span class="hljs-built_in">$finish</span>;
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-keyword">initial</span> 
+    <span class="hljs-keyword">begin</span>
+<span class="hljs-comment">// SET UP THE OUTPUT FORMAT FOR THE TEXT DISPLAY</span>
+        <span class="hljs-built_in">$display</span>(<span class="hljs-string">"\t\t\t         INPUTS         OUTPUTS \n"</span>);
+        <span class="hljs-built_in">$display</span>(<span class="hljs-string">"\t\t\t  RST   LOAD   DATA  |  CNT_OUT  "</span>);
+        <span class="hljs-built_in">$display</span>(<span class="hljs-string">"\t\t\t  ---   ----   ----  |  ----"</span>);
+        <span class="hljs-built_in">$timeformat</span>(-<span class="hljs-number">9</span>, <span class="hljs-number">1</span>, <span class="hljs-string">" ns"</span>, <span class="hljs-number">9</span>); <span class="hljs-comment">//Display time in nanoseconds</span>
+        <span class="hljs-built_in">$monitor</span> (<span class="hljs-built_in">$time</span>,<span class="hljs-string">"     %b     %b      %h   |     %h   "</span>,
+                           rst, load, data, cnt);
+
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h2 id="%e6%b5%8b%e8%af%95%e7%bb%93%e6%9e%9c">测试结果</h2>
+<pre><code class="language-plain"><code><div>#           			         INPUTS         OUTPUTS 
+# 
+# 	             		  RST   LOAD   DATA  |  CNT_OUT  
+# 	            		  ---   ----   ----  |  ----
+#                    0     0     0      00   |     xx   
+#                    3     0     0      00   |     00   
+#                   30     1     0      00   |     00   
+#                   54     1     0      00   |     01   
+#                   74     1     0      00   |     02   
+#                   94     1     0      00   |     03   
+#                  114     1     0      00   |     04   
+#                  134     1     0      00   |     05   
+#                  154     1     0      00   |     06   
+#                  174     1     0      00   |     07   
+#                  194     1     0      00   |     08   
+#                  214     1     0      00   |     09   
+#                  234     1     0      00   |     0a   
+#                  254     1     0      00   |     0b   
+#                  274     1     0      00   |     0c   
+#                  294     1     0      00   |     0d   
+#                  314     1     0      00   |     0e   
+#                  330     0     0      00   |     0e   
+#                  334     0     0      00   |     0f   
+#                  353     0     0      00   |     00   
+#                  360     1     0      00   |     00   
+#                  374     1     0      00   |     01   
+#                  394     1     0      00   |     02   
+#                  414     1     0      00   |     03   
+#                  434     1     0      00   |     04   
+#                  454     1     0      00   |     05   
+#                  474     1     0      00   |     06   
+#                  494     1     0      00   |     07   
+#                  514     1     0      00   |     08   
+#                  534     1     0      00   |     09   
+#                  554     1     0      00   |     0a   
+#                  560     1     0      0a   |     0a   
+#                  574     1     0      0a   |     0b   
+#                  590     1     1      0a   |     0b   
+#                  594     1     1      0a   |     0c   
+#                  613     1     1      0a   |     0a   
+#                  620     1     0      0a   |     0a   
+#                  634     1     0      0a   |     0b   
+#                  654     1     0      0a   |     0c   
+#                  674     1     0      0a   |     0d   
+#                  694     1     0      0a   |     0e   
+#                  714     1     0      0a   |     0f   
+#                  734     1     0      0a   |     10   
+#                  754     1     0      0a   |     11   
+#                  774     1     0      0a   |     12   
+#                  794     1     0      0a   |     13   
+#                  814     1     0      0a   |     14   
+#                  834     1     0      0a   |     15   
+#                  854     1     0      0a   |     16   
+#                  874     1     0      0a   |     17   
+#                  894     1     0      0a   |     18   
+#                  914     1     0      0a   |     19   
+#                  934     1     0      0a   |     1a   
+#                  954     1     0      0a   |     1b   
+#                  974     1     0      0a   |     1c   
+#                  994     1     0      0a   |     1d   
+#                 1014     1     0      0a   |     1e   
+#                 1034     1     0      0a   |     1f   
+#                 1054     1     0      0a   |     00   
+#                 1074     1     0      0a   |     01   
+#                 1094     1     0      0a   |     02   
+#                 1114     1     0      0a   |     03   
+</div></code></code></pre>
+<p><img src="file:///c:\Users\Player\Digital_IC\riscv_proj\report\pic\3-1.png" alt="时序图"></p>
+<p>测试结果表明，模块设计正确，各个功能工作正常。</p>
+
+    </body>
+    </html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>实验二 寄存器</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h1 id="%e5%ae%9e%e9%aa%8c%e4%ba%8c-%e5%af%84%e5%ad%98%e5%99%a8">实验二 寄存器</h1>
+<p>Copyright (c) 2020 Minaduki Shigure.<br>
+专业：电子科学与技术<br>
+学号：171180571<br>
+姓名：吴康正</p>
+<h2 id="%e5%ae%9e%e9%aa%8c%e6%ba%90%e7%a0%81">实验源码</h2>
+<p>使用always块中的条件语句完成复位与使能的判断。</p>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> register(r, clk, data, ena, rst);
+    <span class="hljs-keyword">output</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] r;
+    <span class="hljs-keyword">input</span>  [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] data;
+    <span class="hljs-keyword">input</span>        clk, ena, rst;
+    <span class="hljs-keyword">reg</span>    [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] r;
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> clk, rst)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (!rst)
+        <span class="hljs-keyword">begin</span>
+            r &lt;= <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            <span class="hljs-keyword">if</span> (clk)
+            <span class="hljs-keyword">begin</span>
+                <span class="hljs-keyword">if</span> (ena)
+                <span class="hljs-keyword">begin</span>
+                    r &lt;= data;
+                <span class="hljs-keyword">end</span>
+                <span class="hljs-keyword">else</span>
+                <span class="hljs-keyword">begin</span>
+                    r &lt;= r;
+                <span class="hljs-keyword">end</span>
+            <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+  
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h2 id="%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81">测试代码</h2>
+<p>测试时验证了复位、使能的有效性。</p>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> test;
+    <span class="hljs-keyword">wire</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] reg_out;              <span class="hljs-comment">//declare vector for register output</span>
+    <span class="hljs-keyword">reg</span>  [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] data;
+    <span class="hljs-keyword">reg</span>        ena, rst;
+
+    clock c1 (clk);      <span class="hljs-comment">//clock oscilator</span>
+    register reg1 (<span class="hljs-variable">.r</span>(reg_out), <span class="hljs-variable">.clk</span>(clk), <span class="hljs-variable">.data</span>(data), <span class="hljs-variable">.ena</span>(ena), <span class="hljs-variable">.rst</span>(rst));
+
+  
+<span class="hljs-comment">/*********************************************************************
+  SPECIFY INPUT STIMULI 
+*********************************************************************/</span>
+
+    <span class="hljs-keyword">initial</span> 
+    <span class="hljs-keyword">begin</span>
+	<span class="hljs-comment">// initialize inputs</span>
+        data = <span class="hljs-number">8'b1</span>; ena = <span class="hljs-number">0</span>;
+
+	<span class="hljs-comment">// Output should be unknown</span>
+        #<span class="hljs-number">15</span> ena = <span class="hljs-number">1</span>; rst = <span class="hljs-number">1</span>;
+        #<span class="hljs-number">15</span> rst = <span class="hljs-number">0</span>;
+	                <span class="hljs-comment">// test that reset works:Output should go to zero</span>
+		#<span class="hljs-number">15</span> ena = <span class="hljs-number">0</span>; rst = <span class="hljs-number">1</span>;
+                    <span class="hljs-comment">// test that enable works</span>
+        #<span class="hljs-number">15</span> ena = <span class="hljs-number">1</span>;
+        #<span class="hljs-number">15</span> data = <span class="hljs-number">8'b10</span>;
+        #<span class="hljs-number">20</span> data = <span class="hljs-number">8'b11</span>;
+        #<span class="hljs-number">20</span> data = <span class="hljs-number">8'b101</span>;
+        #<span class="hljs-number">20</span> data = <span class="hljs-number">8'b1001</span>;
+        #<span class="hljs-number">20</span> data = <span class="hljs-number">8'b110</span>;
+        #<span class="hljs-number">20</span> data = <span class="hljs-number">8'b1</span>;
+        #<span class="hljs-number">15</span> ena = <span class="hljs-number">0</span>;
+                      <span class="hljs-comment">// Output should be clocked from data</span>
+        #<span class="hljs-number">15</span> data = <span class="hljs-number">8'b1111</span>;
+        #<span class="hljs-number">15</span> data = <span class="hljs-number">8'b1010</span>;
+                     <span class="hljs-comment">// Output should not be clocked from data.</span>
+        #<span class="hljs-number">1000</span> <span class="hljs-built_in">$finish</span>;
+    <span class="hljs-keyword">end</span>
+    
+    <span class="hljs-keyword">initial</span> 
+    <span class="hljs-keyword">begin</span>
+<span class="hljs-comment">// SET UP THE OUTPUT FORMAT FOR THE TEXT DISPLAY</span>
+        <span class="hljs-built_in">$display</span>(<span class="hljs-string">"\t\t\t         INPUTS         OUTPUTS \n"</span>);
+        <span class="hljs-built_in">$display</span>(<span class="hljs-string">"\t\t\t  RST   ENA   DATA  |  REG_OUT  "</span>);
+        <span class="hljs-built_in">$display</span>(<span class="hljs-string">"\t\t\t  ---   ---   ----  |  ----"</span>);
+        <span class="hljs-built_in">$timeformat</span>(-<span class="hljs-number">9</span>, <span class="hljs-number">1</span>, <span class="hljs-string">" ns"</span>, <span class="hljs-number">9</span>); <span class="hljs-comment">//Display time in nanoseconds</span>
+        <span class="hljs-built_in">$monitor</span> (<span class="hljs-built_in">$time</span>,<span class="hljs-string">"     %b     %b     %h   |     %h   "</span>,
+                           rst, ena, data, reg_out);
+
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h2 id="%e6%b5%8b%e8%af%95%e7%bb%93%e6%9e%9c">测试结果</h2>
+<pre><code class="language-plain"><code><div>#           			         INPUTS         OUTPUTS 
+# 
+# 		            	  RST   ENA   DATA  |  REG_OUT  
+# 		            	  ---   ---   ----  |  ----
+#                    0     x     0     01   |     xx   
+#                   15     1     1     01   |     01   
+#                   30     0     1     01   |     00   
+#                   45     1     0     01   |     00   
+#                   60     1     1     01   |     00   
+#                   70     1     1     01   |     01   
+#                   75     1     1     02   |     01   
+#                   90     1     1     02   |     02   
+#                   95     1     1     03   |     02   
+#                  110     1     1     03   |     03   
+#                  115     1     1     05   |     03   
+#                  130     1     1     05   |     05   
+#                  135     1     1     09   |     05   
+#                  150     1     1     09   |     09   
+#                  155     1     1     06   |     09   
+#                  170     1     1     06   |     06   
+#                  175     1     1     01   |     06   
+#                  190     1     0     01   |     01   
+#                  205     1     0     0f   |     01   
+#                  220     1     0     0a   |     01  
+</div></code></code></pre>
+<p><img src="file:///c:\Users\Player\Digital_IC\riscv_proj\report\pic\2-1.png" alt="时序图"></p>
+<p>测试结果表明，模块设计正确，各个功能工作正常。</p>
+
+    </body>
+    </html>
