@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>实验五 存储器</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="%e5%ae%9e%e9%aa%8c%e4%ba%94-%e5%ad%98%e5%82%a8%e5%99%a8">实验五 存储器</h1>
+<p>Copyright (c) 2020 Minaduki Shigure.<br>
+专业：电子科学与技术<br>
+学号：171180571<br>
+姓名：吴康正</p>
+<h2 id="%e5%ae%9e%e9%aa%8c%e6%ba%90%e7%a0%81">实验源码</h2>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> mem(
+    <span class="hljs-keyword">inout</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] data,
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">4</span>:<span class="hljs-number">0</span>] addr,
+    <span class="hljs-keyword">input</span> read,
+    <span class="hljs-keyword">input</span> write
+);
+
+<span class="hljs-keyword">reg</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] memory [<span class="hljs-number">31</span>:<span class="hljs-number">0</span>];
+
+<span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> write)
+<span class="hljs-keyword">begin</span>
+    memory[addr] = data;
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">assign</span> data = read ? memory[addr] : <span class="hljs-number">8'bzzzz_zzzz</span>;
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h2 id="%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81%e4%b8%8e%e7%bb%93%e6%9e%9c">测试代码与结果</h2>
+<p>使用提供的测试代码进行测试。</p>
+<pre><code class="language-plain"><code><div>#    Setting all memory cells to zero...   0.0 ns
+# 
+#    Reading from one memory address...  64.0 ns
+# 
+#    Setting all memory cells to alternating patterns...  84.0 ns
+# 
+#    Doing block read from five memory addresses... 158.0 ns
+# 
+#    Completed Memory Tests With 0 Errors!
+</div></code></code></pre>
+<p>向内存中05-09地址写入的时序图：
+<img src="file:///c:\Users\Player\Digital_IC\riscv_proj\report\pic\5-1.png" alt="写时序图">
+读取05-09地址内存时的时序图：
+<img src="file:///c:\Users\Player\Digital_IC\riscv_proj\report\pic\5-2.png" alt="读时序图"></p>
+<p>测试结果表明，模块设计正确，各个功能工作正常。</p>
+
+    </body>
+    </html>

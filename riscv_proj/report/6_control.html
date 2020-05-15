@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>实验六 控制器</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h1 id="%e5%ae%9e%e9%aa%8c%e5%85%ad-%e6%8e%a7%e5%88%b6%e5%99%a8">实验六 控制器</h1>
+<p>Copyright (c) 2020 Minaduki Shigure.<br>
+专业：电子科学与技术<br>
+学号：171180571<br>
+姓名：吴康正</p>
+<h2 id="%e5%ae%9e%e9%aa%8c%e6%ba%90%e7%a0%81">实验源码</h2>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> control(
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> rd,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> wr,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> ld_ir,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> ld_acc,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> ld_pc,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> inc_pc,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> halt,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> data_e,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> sel,
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] opcode,
+    <span class="hljs-keyword">input</span> zero,
+    <span class="hljs-keyword">input</span> clock,
+    <span class="hljs-keyword">input</span> reset
+);
+
+<span class="hljs-keyword">parameter</span> 
+    HLT = <span class="hljs-number">3'b000</span>,
+    SKZ = <span class="hljs-number">3'b001</span>,
+    ADD = <span class="hljs-number">3'b010</span>,
+    AND = <span class="hljs-number">3'b011</span>,
+    XOR = <span class="hljs-number">3'b100</span>,
+    LDA = <span class="hljs-number">3'b101</span>,
+    STO = <span class="hljs-number">3'b110</span>,
+    JMP = <span class="hljs-number">3'b111</span>;
+
+<span class="hljs-keyword">reg</span> [<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] state;
+
+<span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> clock <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> reset)
+<span class="hljs-keyword">begin</span>
+    <span class="hljs-keyword">if</span> (!reset)
+    <span class="hljs-keyword">begin</span>
+        state &lt;= <span class="hljs-number">3'b000</span>;
+        {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0</span>;
+    <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">case</span> (state)
+            <span class="hljs-number">3'b000</span>:
+            <span class="hljs-keyword">begin</span>
+                state &lt;= <span class="hljs-number">3'b001</span>;
+                {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_0000_0001</span>;
+            <span class="hljs-keyword">end</span>
+            <span class="hljs-number">3'b001</span>:
+            <span class="hljs-keyword">begin</span>
+                state &lt;= <span class="hljs-number">3'b010</span>;
+                {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b1_0000_0001</span>;
+            <span class="hljs-keyword">end</span> 
+            <span class="hljs-number">3'b010</span>:
+            <span class="hljs-keyword">begin</span>
+                state &lt;= <span class="hljs-number">3'b011</span>;
+                {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b1_0100_0001</span>;
+            <span class="hljs-keyword">end</span> 
+            <span class="hljs-number">3'b011</span>:
+            <span class="hljs-keyword">begin</span>
+                state &lt;= <span class="hljs-number">3'b100</span>;
+                {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b1_0100_0001</span>;
+            <span class="hljs-keyword">end</span> 
+            <span class="hljs-number">3'b100</span>:
+            <span class="hljs-keyword">begin</span>
+                state &lt;= <span class="hljs-number">3'b101</span>;
+                <span class="hljs-keyword">if</span> (opcode == HLT) <span class="hljs-keyword">begin</span>
+                    {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_0000_1100</span>;
+                <span class="hljs-keyword">end</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span>
+                    {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_0000_1000</span>;
+                <span class="hljs-keyword">end</span>
+            <span class="hljs-keyword">end</span> 
+            <span class="hljs-number">3'b101</span>:
+            <span class="hljs-keyword">begin</span>
+                state &lt;= <span class="hljs-number">3'b110</span>;
+                <span class="hljs-keyword">if</span> (opcode == ADD || opcode == AND || opcode == XOR || opcode == LDA) <span class="hljs-keyword">begin</span>
+                    {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b1_0000_0000</span>;
+                <span class="hljs-keyword">end</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span>
+                    {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_0000_0000</span>;
+                <span class="hljs-keyword">end</span>
+            <span class="hljs-keyword">end</span> 
+            <span class="hljs-number">3'b110</span>:
+            <span class="hljs-keyword">begin</span>
+                state &lt;= <span class="hljs-number">3'b111</span>;
+                <span class="hljs-keyword">if</span> (opcode == SKZ &amp;&amp; zero) <span class="hljs-keyword">begin</span>
+                    {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_0000_1010</span>;
+                <span class="hljs-keyword">end</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span>
+                    <span class="hljs-keyword">if</span> (opcode == ADD || opcode == AND || opcode == XOR || opcode == LDA) <span class="hljs-keyword">begin</span>
+                        {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b1_0000_0000</span>;
+                    <span class="hljs-keyword">end</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span>
+                        <span class="hljs-keyword">if</span> (opcode == JMP) <span class="hljs-keyword">begin</span>
+                            {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_0001_0010</span>;
+                        <span class="hljs-keyword">end</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span>
+                            {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_0000_0010</span>;
+                        <span class="hljs-keyword">end</span>
+                    <span class="hljs-keyword">end</span>
+                <span class="hljs-keyword">end</span>
+            <span class="hljs-keyword">end</span>
+            <span class="hljs-number">3'b111</span>:
+            <span class="hljs-keyword">begin</span>
+                state &lt;= <span class="hljs-number">3'b000</span>;
+                <span class="hljs-keyword">if</span> (opcode == SKZ &amp;&amp; zero) <span class="hljs-keyword">begin</span>
+                    {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_0000_1010</span>;
+                <span class="hljs-keyword">end</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span>
+                    <span class="hljs-keyword">if</span> (opcode == ADD || opcode == AND || opcode == XOR || opcode == LDA) <span class="hljs-keyword">begin</span>
+                        {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b1_0010_0000</span>;
+                    <span class="hljs-keyword">end</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span>
+                        <span class="hljs-keyword">if</span> (opcode == STO) <span class="hljs-keyword">begin</span>
+                            {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_1000_0010</span>;
+                        <span class="hljs-keyword">end</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span>
+                            <span class="hljs-keyword">if</span> (opcode == JMP) <span class="hljs-keyword">begin</span>
+                                {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_0001_1010</span>;
+                            <span class="hljs-keyword">end</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">begin</span>
+                                {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} &lt;= <span class="hljs-number">9'b0_0000_0010</span>;
+                            <span class="hljs-keyword">end</span>
+                        <span class="hljs-keyword">end</span>
+                    <span class="hljs-keyword">end</span>
+                <span class="hljs-keyword">end</span>
+            <span class="hljs-keyword">end</span> 
+            <span class="hljs-comment">// default: </span>
+        <span class="hljs-keyword">endcase</span> 
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h2 id="%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81%e4%b8%8e%e7%bb%93%e6%9e%9c">测试代码与结果</h2>
+<p>使用提供的测试代码进行测试。</p>
+<pre><code class="language-plain"><code><div># *** REACHED END OF TEST VECTORS ***
+# 
+# There were 0 errors detected!
+# 
+# ** Note: $finish    : control_tb.v(74)
+</div></code></code></pre>
+<p><img src="file:///c:\Users\Player\Digital_IC\riscv_proj\report\pic\6-1.png" alt="时序图"></p>
+<p>测试结果表明，模块设计正确，各个功能工作正常。</p>
+
+    </body>
+    </html>

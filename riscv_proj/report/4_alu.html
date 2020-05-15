@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>实验四 算术逻辑单元</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="%e5%ae%9e%e9%aa%8c%e5%9b%9b-%e7%ae%97%e6%9c%af%e9%80%bb%e8%be%91%e5%8d%95%e5%85%83">实验四 算术逻辑单元</h1>
+<p>Copyright (c) 2020 Minaduki Shigure.<br>
+专业：电子科学与技术<br>
+学号：171180571<br>
+姓名：吴康正</p>
+<h2 id="%e5%ae%9e%e9%aa%8c%e6%ba%90%e7%a0%81">实验源码</h2>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> alu(
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] accum,
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] data,
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] opcode,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> zero,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] alu_out
+);
+
+<span class="hljs-keyword">parameter</span>
+    PASSACCUM0 = <span class="hljs-number">3'b000</span>,
+    PASSACCUM1 = <span class="hljs-number">3'b001</span>,
+    ADDOP = <span class="hljs-number">3'b010</span>,
+    ANDOP = <span class="hljs-number">3'b011</span>,
+    XOROP = <span class="hljs-number">3'b100</span>,
+    PASSDATA = <span class="hljs-number">3'b101</span>,
+    PASSACCUM2 = <span class="hljs-number">3'b110</span>,
+    PASSACCUM3 = <span class="hljs-number">3'b111</span>;
+
+<span class="hljs-keyword">parameter</span> 
+    op_delay = <span class="hljs-number">3</span><span class="hljs-variable">.5</span>,
+    zero_delay = <span class="hljs-number">1</span><span class="hljs-variable">.2</span>;
+
+<span class="hljs-keyword">always</span> @ (accum <span class="hljs-keyword">or</span> data <span class="hljs-keyword">or</span> opcode)
+<span class="hljs-keyword">begin</span>
+    <span class="hljs-keyword">case</span> (opcode)
+        PASSACCUM0 : alu_out &lt;= #op_delay accum;
+        PASSACCUM1 : alu_out &lt;= #op_delay accum;
+        ADDOP : alu_out &lt;= #op_delay data + accum;
+        ANDOP : alu_out &lt;= #op_delay data &amp; accum;
+        XOROP : alu_out &lt;= #op_delay data ^ accum;
+        PASSDATA : alu_out &lt;= #op_delay data;
+        PASSACCUM2 : alu_out &lt;= #op_delay accum;
+        PASSACCUM3 : alu_out &lt;= #op_delay accum;
+        <span class="hljs-keyword">default</span>: alu_out &lt;= #op_delay <span class="hljs-number">8'bxxxx_xxxx</span>;
+    <span class="hljs-keyword">endcase</span> 
+    zero &lt;= #zero_delay (!accum);
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h2 id="%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81%e4%b8%8e%e7%bb%93%e6%9e%9c">测试代码与结果</h2>
+<p>使用提供的测试代码进行测试。</p>
+<pre><code class="language-plain"><code><div># 			            INPUTS                       OUTPUTS 
+# 
+# 			  OPCODE   DATA IN    ACCUM IN  |  ALU OUT   ZERO BIT
+# 			  ------   --------   --------  |  --------  --------
+# PASS ACCUM OPERATION:      000     00110111   11011010  |  11011010      0
+# PASS ACCUM OPERATION:      001     00110111   11011010  |  11011010      0
+# ADD OPERATION       :      010     00110111   11011010  |  00010001      0
+# AND OPERATION       :      011     00110111   11011010  |  00010010      0
+# XOR OPERATION       :      100     00110111   11011010  |  11101101      0
+# PASS DATA OPERATION :      101     00110111   11011010  |  00110111      0
+# PASS ACCUM OPERATION:      110     00110111   11011010  |  11011010      0
+# PASS ACCUM OPERATION:      111     00110111   11011010  |  11011010      0
+# UNKNOWN OPERATION   :      00x     00110111   11011010  |  xxxxxxxx      0
+# ADD OPERATION       :      010     00110111   00000000  |  00110111      1
+# 
+# No errors were found!
+</div></code></code></pre>
+<p><img src="file:///c:\Users\Player\Digital_IC\riscv_proj\report\pic\4-1.png" alt="时序图"></p>
+<p>测试结果表明，模块设计正确，各个功能工作正常。</p>
+
+    </body>
+    </html>
