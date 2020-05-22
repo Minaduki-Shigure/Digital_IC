@@ -1,0 +1,105 @@
+/*****************************************************************************
+ * Test stimulus for CPU design 
+ * module name:cpu_test.v
+ * author: 
+ * date: 
+
+ ****************************************************************************/
+
+`timescale 1ns / 1ns
+module cpu_test; 
+
+  reg reset_req;
+  reg [(3*8):0] mnemonic;            //array that holds 3 8-bit ASCII characters
+  integer tnum;
+  cpu cpu1(reset_req);               //instance of the VeriRisc CPU design
+
+  initial                           
+    begin
+      $timeformat(-9, 1, " ns", 12);   //display time in nanoseconds
+      display_debug_message;
+    end
+
+  always @(posedge cpu1.halt)        //STOP when HALT instruction decoded
+    begin
+      #30 $display("\n***   A HALT INSTRUCTION WAS PROCESSED\t ***\n");
+      disable test_check;
+      display_debug_message;
+    end
+  task display_debug_message;
+    begin
+      $display("\n  *************************************************************");
+      $display("  *        THE FOLLOWING DEBUG TASKS ARE AVAILABLE:             *");
+      $display("  *  load the 1st diagnostic program, then continue simulation. *");
+      //test(1);
+      $display("  *  load the 2nd diagnostic program, then continue simulation. *");
+      test(2);
+      $display("  *  load the Fibonacci program, then continue simulation.      *");
+      //test(3);
+      $display("  *  Open a waveform viewer if you would like to see the waveforms for this lab  *");
+      $display("  ******************************************************************************\n");
+      $stop; 
+      end
+  endtask
+
+  task test;
+    input [1:0] N;
+    reg [12*8:1] testfile;
+    if (N)
+    begin
+      testfile = {"CPUtest", 8'h30+N, ".dat"};
+      $readmemb(testfile,cpu1.mem1.memory); //load Nth diagnostic program
+      $display("\n***\t\tRUNNING CPUtest%0d", N, "\t ***");
+      fork
+        test_check(N);
+        reset_req = 0;
+        #71 reset_req = 1;
+      join
+    end
+    else begin
+      $display("\nThe number you entered was not a valid test number.",
+                  "  Please try again.\n\n");
+      display_debug_message;
+    end
+  endtask
+
+  task test_check;
+  input [1:0] N;
+  reg   [4:0] stop_addr;
+    case (N)
+      1,2: begin                 //display results when running test 1 or 2
+	   stop_addr = (N == 1) ? 5'h17 : 5'h10;
+           $display("*** (THIS TEST SHOULD HALT WITH PC = %0h", stop_addr, ") ***");
+           $display("\n PC    INSTR    OP   DATA   ADR");
+           $display(  " --    -----    --   ----   ---");
+           forever @(cpu1.opcode or cpu1.ir_addr)
+	     $strobe(" %h    %s      %h    %h     %h", cpu1.pc_addr, mnemonic,
+		cpu1.opcode, cpu1.data, cpu1.addr);
+           end
+        3: begin                   //display results when running test 3
+             $display("***  This program calculates the fibonacci  ***");
+             $display("***  number sequence from 0 to 144          ***");
+             $display("\n \t FIBONACCI NUMBER");
+             $display(  " \t ----------------");
+             forever @ (posedge (cpu1.opcode == 3'h7))
+               //display Fib. No. at end of program loop
+               $strobe("\t\t%d", cpu1.mem1.memory[5'h1B]);
+           end
+      endcase
+  endtask
+
+  always @(cpu1.opcode)             //get an ASCII mnemonic for each opcode
+    case(cpu1.opcode)
+      3'h0    : mnemonic = "HLT";
+      3'h1    : mnemonic = "SKZ";
+      3'h2    : mnemonic = "ADD";
+      3'h3    : mnemonic = "AND";
+      3'h4    : mnemonic = "XOR";
+      3'h5    : mnemonic = "LDA";
+      3'h6    : mnemonic = "STO";
+      3'h7    : mnemonic = "JMP";
+      default : mnemonic = "???";
+    endcase
+
+endmodule
+

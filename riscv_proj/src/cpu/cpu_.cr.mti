@@ -1,0 +1,64 @@
+E:/LABS/risk_cpu/risk_cpu/counter/counter.v {1 {vlog -work work -vopt -nocovercells E:/LABS/risk_cpu/risk_cpu/counter/counter.v
+Model Technology ModelSim SE vlog 6.5 Compiler 2009.01 Jan 22 2009
+-- Compiling module counter
+
+Top level modules:
+	counter
+
+} {} {}} E:/LABS/risk_cpu/risk_cpu/alu/alu.v {1 {vlog -work work -vopt -nocovercells E:/LABS/risk_cpu/risk_cpu/alu/alu.v
+Model Technology ModelSim SE vlog 6.5 Compiler 2009.01 Jan 22 2009
+-- Compiling module alu
+
+Top level modules:
+	alu
+
+} {} {}} E:/LABS/risk_cpu/risk_cpu/cpu/cpu.v {1 {vlog -work work -vopt -nocovercells E:/LABS/risk_cpu/risk_cpu/cpu/cpu.v
+Model Technology ModelSim SE vlog 6.5 Compiler 2009.01 Jan 22 2009
+-- Compiling module cpu
+
+Top level modules:
+	cpu
+
+} {} {}} E:/LABS/risk_cpu/risk_cpu/cpu/clkgen.v {1 {vlog -work work -vopt -nocovercells E:/LABS/risk_cpu/risk_cpu/cpu/clkgen.v
+Model Technology ModelSim SE vlog 6.5 Compiler 2009.01 Jan 22 2009
+-- Compiling module clkgen
+
+Top level modules:
+	clkgen
+
+} {} {}} E:/LABS/risk_cpu/risk_cpu/register/register.v {1 {vlog -work work -vopt -nocovercells E:/LABS/risk_cpu/risk_cpu/register/register.v
+Model Technology ModelSim SE vlog 6.5 Compiler 2009.01 Jan 22 2009
+-- Compiling module register
+
+Top level modules:
+	register
+
+} {} {}} E:/LABS/risk_cpu/risk_cpu/mem/mem.v {1 {vlog -work work -vopt -nocovercells E:/LABS/risk_cpu/risk_cpu/mem/mem.v
+Model Technology ModelSim SE vlog 6.5 Compiler 2009.01 Jan 22 2009
+-- Compiling module mem
+
+Top level modules:
+	mem
+
+} {} {}} E:/LABS/risk_cpu/risk_cpu/control/control.v {1 {vlog -work work -vopt -nocovercells E:/LABS/risk_cpu/risk_cpu/control/control.v
+Model Technology ModelSim SE vlog 6.5 Compiler 2009.01 Jan 22 2009
+-- Compiling module control
+
+Top level modules:
+	control
+
+} {} {}} E:/LABS/risk_cpu/risk_cpu/mux/scale_mux.v {1 {vlog -work work -vopt -nocovercells E:/LABS/risk_cpu/risk_cpu/mux/scale_mux.v
+Model Technology ModelSim SE vlog 6.5 Compiler 2009.01 Jan 22 2009
+-- Compiling module scale_mux
+
+Top level modules:
+	scale_mux
+
+} {} {}} E:/LABS/risk_cpu/risk_cpu/cpu/cpu_test.v {1 {vlog -work work -vopt -nocovercells E:/LABS/risk_cpu/risk_cpu/cpu/cpu_test.v
+Model Technology ModelSim SE vlog 6.5 Compiler 2009.01 Jan 22 2009
+-- Compiling module cpu_test
+
+Top level modules:
+	cpu_test
+
+} {} {}}

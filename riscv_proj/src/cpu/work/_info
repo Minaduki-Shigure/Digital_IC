@@ -1,0 +1,281 @@
+m255
+K4
+z2
+13
+cModel Technology
+Z0 dF:/project/risk_cpu_2/cpu
+!s112 0.1
+!i10d 8192
+!i10e 25
+!i10f 100
+valu
+Z1 V`JN@9S9cnhjKRR_L]QIcM3
+r1
+31
+I`jTT9`C2[<57@5`=FUP2:1
+Z2 dF:/project/risk_cpu_2/cpu
+w1588058729
+8../alu/alu.v
+F../alu/alu.v
+L0 8
+Z3 OL;L;10.2c;57
+Z4 o-L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+!s85 0
+!s100 ziMmg:539l6mzJYiiTCe<2
+!s90 -reportprogress|300|../alu/alu.v|
+!s108 1589875000.980000
+!s107 ../alu/alu.v|
+!i10b 1
+!i111 0
+vclkgen
+R1
+r1
+!s85 0
+31
+IQ@Vl603V4AO[4oTXdDDRG3
+R2
+w1587950887
+8clkgen.v
+Fclkgen.v
+L0 16
+R3
+R4
+!s100 Dm00:a1YL[2PjQLFdLDIn2
+!s90 -reportprogress|300|clkgen.v|
+!s108 1589875000.679000
+!s107 clkgen.v|
+!i10b 1
+!i111 0
+vcontrol
+R1
+r1
+31
+I`Kj3CfQmMgi[T52lCIDTg1
+R2
+w1587950370
+8../control/control.v
+F../control/control.v
+L0 10
+R3
+R4
+!s85 0
+!s100 :WA3n^9gfW1V;0ni;hk]R2
+!s90 -reportprogress|300|../control/control.v|
+!i10b 1
+!s108 1589875001.145000
+!s107 ../control/control.v|
+!i111 0
+vcounter
+R1
+r1
+31
+I_?ZM3KG@<Zii8<D8]_7OW2
+R2
+w1588058774
+8../counter/counter.v
+F../counter/counter.v
+L0 8
+R3
+R4
+!s85 0
+!s100 hg:Q:7<dN5mcP53AfJL=f0
+!s90 -reportprogress|300|../counter/counter.v|
+!s108 1589875000.908000
+!s107 ../counter/counter.v|
+!i10b 1
+!i111 0
+vcpu
+R1
+r1
+31
+IT23c77oJIKQL59Lz8>F4a2
+R2
+w1587951016
+8cpu.v
+Fcpu.v
+L0 9
+R3
+R4
+!s85 0
+!s100 ?PfHEz:De]j_@z]?][=BC3
+!s90 -reportprogress|300|cpu.v|
+!s108 1589875000.602000
+!s107 cpu.v|
+!i10b 1
+!i111 0
+vcpu_test
+R1
+r1
+31
+IjAiCVSnnRM8SDcWX:Jf[J2
+R2
+w1589874995
+8cpu_test.v
+Fcpu_test.v
+L0 10
+R3
+R4
+!s85 0
+!s90 -reportprogress|300|cpu_test.v|
+!s100 WR2;JMo]LYj@VS?g;igN23
+!s108 1589875000.527000
+!s107 cpu_test.v|
+!i10b 1
+!i111 0
+vdffr_b
+Z5 !s110 1589874462
+IDREWl3G_=QN9mhMPLH>9m0
+R1
+R2
+Z6 w1321493578
+8F:/project/risk_cpu_2/cpu/cells_lib/dffr_b.v
+FF:/project/risk_cpu_2/cpu/cells_lib/dffr_b.v
+L0 4
+R3
+r1
+31
+Z7 !s108 1589874462.178000
+Z8 !s107 F:/project/risk_cpu_2/cpu/cells_lib/nand4_b.v|F:/project/risk_cpu_2/cpu/cells_lib/nand3_b.v|F:/project/risk_cpu_2/cpu/cells_lib/nand2_b.v|F:/project/risk_cpu_2/cpu/cells_lib/mux1.v|F:/project/risk_cpu_2/cpu/cells_lib/dffr_b.v|
+Z9 !s90 -reportprogress|300|F:/project/risk_cpu_2/cpu/cells_lib/dffr_b.v|F:/project/risk_cpu_2/cpu/cells_lib/mux1.v|F:/project/risk_cpu_2/cpu/cells_lib/nand2_b.v|F:/project/risk_cpu_2/cpu/cells_lib/nand3_b.v|F:/project/risk_cpu_2/cpu/cells_lib/nand4_b.v|
+R4
+!s100 _lQl_>2=OQeG23m<e2lNR2
+!i10b 1
+!s85 0
+!i111 0
+vmem
+R1
+r1
+31
+I4M77<K3^Y5=:eW<CY4_^T3
+R2
+w1587951057
+8../mem/mem.v
+F../mem/mem.v
+L0 11
+R3
+R4
+!s85 0
+!s100 :EFP>FbCM5cTBQP3POVi<1
+!s90 -reportprogress|300|../mem/mem.v|
+!s108 1589875001.070000
+!s107 ../mem/mem.v|
+!i10b 1
+!i111 0
+vmux1
+R5
+I^657_?Mmz7A5feURB36g10
+R1
+R2
+R6
+8F:/project/risk_cpu_2/cpu/cells_lib/mux1.v
+FF:/project/risk_cpu_2/cpu/cells_lib/mux1.v
+L0 2
+R3
+r1
+31
+R7
+R8
+R9
+R4
+!s100 _ZYIe>`M10M`<JnmBfGa>2
+!i10b 1
+!s85 0
+!i111 0
+vnand2_b
+R5
+I3FQRH[CODK837@9<nC`cO2
+R1
+R2
+R6
+8F:/project/risk_cpu_2/cpu/cells_lib/nand2_b.v
+FF:/project/risk_cpu_2/cpu/cells_lib/nand2_b.v
+L0 2
+R3
+r1
+31
+R7
+R8
+R9
+R4
+!s100 za0lH^4=@]oAFXod3`0Fc0
+!i10b 1
+!s85 0
+!i111 0
+vnand3_b
+R5
+I1QS1X>TKNC@EQV7jV76E61
+R1
+R2
+R6
+8F:/project/risk_cpu_2/cpu/cells_lib/nand3_b.v
+FF:/project/risk_cpu_2/cpu/cells_lib/nand3_b.v
+L0 2
+R3
+r1
+31
+R7
+R8
+R9
+R4
+!s100 IeBdC;_A4FOnZ7cE2A=Yk1
+!i10b 1
+!s85 0
+!i111 0
+vnand4_b
+R5
+Ig;G0COaDm<XcZ09NDdI1:1
+R1
+R2
+w1321493580
+8F:/project/risk_cpu_2/cpu/cells_lib/nand4_b.v
+FF:/project/risk_cpu_2/cpu/cells_lib/nand4_b.v
+L0 2
+R3
+r1
+31
+R7
+R8
+R9
+R4
+!s100 jA]O3klRgR09Y>dko4`282
+!i10b 1
+!s85 0
+!i111 0
+vregister
+R1
+r1
+31
+ICbM1=JTeZIFd5ODTlgPG31
+R2
+w1588125680
+8../register/register.v
+F../register/register.v
+L0 9
+R3
+R4
+!s85 0
+!s100 dSOC^Pl[QVc?WB>4kUPCn3
+!s90 -reportprogress|300|../register/register.v|
+!s108 1589875000.756000
+!s107 ../register/register.v|
+!i10b 1
+!i111 0
+vscale_mux
+R1
+r1
+31
+IP3?8Yhj[INNzFW>emaQQG3
+R2
+w1587951145
+8../mux/scale_mux.v
+F../mux/scale_mux.v
+L0 11
+R3
+R4
+!s85 0
+!s100 ^UQ8;mlGf0mDn;^R6ad?03
+!s90 -reportprogress|300|../mux/scale_mux.v|
+!s108 1589875000.829000
+!s107 ../mux/scale_mux.v|
+!i10b 1
+!i111 0

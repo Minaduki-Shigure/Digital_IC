@@ -1,0 +1,767 @@
+                                        
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+                                        
+                 Version K-2015.06 for linux64 - May 28, 2015 
+                                        
+                    Copyright (c) 1988 - 2015 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+            or distribution of this software is strictly prohibited.
+Initializing...
+Initializing gui preferences from file  /home/IC/.synopsys_dv_prefs.tcl
+dc_shell> source common_setup.tcl 
+sc.sdb
+dc_shell> source dc_setup.tcl 
+sc.sdb
+dc_shell> read_db sc_max.db
+Loading db file '/home/IC/Desktop/DC_labs/ref/libs/mw_lib/sc/LM/sc_max.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fast.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fast_leakage.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fastz.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/slow.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/typical.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/typical_leakage.db'
+Loading db file '/opt/Synopsys/Synplify2015/libraries/syn/gtech.db'
+Loading db file '/opt/Synopsys/Synplify2015/libraries/syn/standard.sldb'
+  Loading link library 'cb13fs120_tsmc_max'
+  Loading link library 'fast'
+  Loading link library 'fast_leakage'
+  Loading link library 'fastz'
+  Loading link library 'slow'
+  Loading link library 'typical'
+  Loading link library 'typical_leakage'
+  Loading link library 'gtech'
+Loading db file '/home/IC/Desktop/DC_labs/ref/libs/mw_lib/sc/LM/sc_max.db'
+Warning: Overwriting design file '/home/IC/Desktop/DC_labs/ref/libs/mw_lib/sc/LM/sc_max.db'. (DDB-24)
+Loaded 0 designs.
+dc_shell> list_libs
+Logical Libraries:
+-------------------------------------------------------------------------
+Library		File			Path
+-------		----			----
+  fast		fast.db			/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys
+  fast_leakage	fast_leakage.db		/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys
+  fastz		fastz.db		/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys
+  slow		slow.db			/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys
+  typical	typical.db		/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys
+  typical_leakage typical_leakage.db	/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys
+  gtech		gtech.db		/opt/Synopsys/Synplify2015/libraries/syn
+  standard.sldb	standard.sldb		/opt/Synopsys/Synplify2015/libraries/syn
+  cb13fs120_tsmc_max sc_max.db		/home/IC/Desktop/DC_labs/ref/libs/mw_lib/sc/LM
+1
+dc_shell> read_verilog tr[K[Krtl/MUY[K[KY_DESIGN.v 
+Loading verilog file '/home/IC/Desktop/DC_labs/lab2/rtl/MY_DESIGN.v'
+Detecting input file type automatically (-rtl or -netlist).
+Reading with Presto HDL Compiler (equivalent to -rtl option).
+Running PRESTO HDLC
+Compiling source file /home/IC/Desktop/DC_labs/lab2/rtl/MY_DESIGN.v
+
+Inferred memory devices in process
+	in routine MY_DESIGN line 13 in file
+		'/home/IC/Desktop/DC_labs/lab2/rtl/MY_DESIGN.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|       R4_reg        | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|       R2_reg        | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|       R3_reg        | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|       R1_reg        | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+
+Statistics for case statements in always block at line 40 in file
+	'/home/IC/Desktop/DC_labs/lab2/rtl/MY_DESIGN.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            43            |    auto/auto     |
+===============================================
+Presto compilation completed successfully.
+Current design is now '/home/IC/Desktop/DC_labs/lab2/rtl/MY_DESIGN.db:MY_DESIGN'
+Loaded 3 designs.
+Current design is 'MY_DESIGN'.
+MY_DESIGN ARITH COMBO
+dc_shell> source scrt[Kipts/MY_DESIGN.con 
+1
+dc_shell> chek[Kck
+check_bindings              check_error                 check_synlib                
+check_block_abstraction     check_implementations       check_target_library_subset 
+check_bsd                   check_library               check_timing                
+check_budget                check_license               check_upf                   
+check_clocks                check_mv_design             
+check_design                check_scan_def              
+dc_shell> check_i[Ktiming
+Information: Changed wire load model for 'ARITH' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'COMBO' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'ARITH' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_sub_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*SUB_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_sub_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*SUB_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_sub_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*SUB_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Updating design information... (UID-85)
+
+Information: Checking generated_clocks...
+
+Information: Checking loops...
+
+Information: Checking no_input_delay...
+
+Information: Checking unconstrained_endpoints...
+
+Information: Checking pulse_clock_cell_type...
+
+Information: Checking no_driving_cell...
+
+Information: Checking partial_input_delay...
+Warning: there are 21 input ports that only have partial input delay specified. (TIM-212)
+--------------------
+Cin1[4]
+Cin1[3]
+Cin1[2]
+Cin1[1]
+Cin1[0]
+[7m--More--[0m[A
+[KCin2[4]
+[7m--More--[0m[A
+[KCin2[3]
+[7m--More--[0m[A
+[KCin2[2]
+[7m--More--[0m[A
+[KCin2[1]
+[7m--More--[0m[A
+[KCin2[0]
+[7m--More--[0m[A
+[Kdata1[4]
+[7m--More--[0m[A
+[Kdata1[3]
+[7m--More--[0m[A
+[Kdata1[2]
+[7m--More--[0m[A
+[Kdata1[1]
+[7m--More--[0m[A
+[Kdata1[0]
+[7m--More--[0m[A
+[Kdata2[4]
+[7m--More--[0m[A
+[Kdata2[3]
+[7m--More--[0m[A
+[Kdata2[2]
+[7m--More--[0m[A
+[Kdata2[1]
+[7m--More--[0m[A
+[Kdata2[0]
+[7m--More--[0m[A
+[Ksel
+1
+dc_shell> 
+dc_shell> commm[K[Kp[Kpile_ultra
+Information: Performing power optimization. (PWR-850)
+Alib files are up-to-date.
+Loading db file '/opt/Synopsys/Synplify2015/libraries/syn/dw_foundation.sldb'
+Warning: DesignWare synthetic library dw_foundation.sldb is added to the synthetic_library in the current command. (UISN-40)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | K-2015.06-DWBB_201506.0 |     *     |
+| Licensed DW Building Blocks        | K-2015.06-DWBB_201506.0 |     *     |
+| fast                               | 1.300000                |           |
+| fast_leakage                       | 1.300000                |           |
+| fastz                              | 1.300000                |           |
+| slow                               | 1.300000                |           |
+| typical                            | 1.300000                |           |
+| typical_leakage                    | 1.300000                |           |
+============================================================================
+
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 2 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+Loaded alib file './alib-52/sc_max.db.alib'
+  Building model 'DW01_NAND2'
+Information: Ungrouping hierarchy U1_ARITH before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy U_COMBO before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy U_COMBO/U2_ARITH before Pass 1 (OPT-776)
+Information: Ungrouping 3 of 4 hierarchies before Pass 1 (OPT-775)
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'MY_DESIGN'
+ Implement Synthetic for 'MY_DESIGN'.
+Memory usage for J1 task 373 Mbytes -- main task 373 Mbytes.
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+Information: Added key list 'DesignWare' to design 'MY_DESIGN'. (DDB-72)
+Information: In design 'MY_DESIGN', the register 'R3_reg[0]' is removed because it is merged to 'R1_reg[0]'. (OPT-1215)
+
+  Beginning Constant Register Removal
+  -----------------------------------
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+
+  Beginning Isolate Ports
+  -----------------------
+
+  Beginning Delay Optimization
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:07     326.9      0.00       0.0       0.0                           1667559.3750
+    0:00:07     326.9      0.00       0.0       0.0                           1667559.3750
+    0:00:07     326.9      0.00       0.0       0.0                           1667559.3750
+    0:00:07     326.9      0.00       0.0       0.0                           1667559.3750
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:00:07     326.9      0.00       0.0       0.0                           1664906.7500
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+  Global Optimization (Phase 30)
+  Global Optimization (Phase 31)
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+  Global Optimization (Phase 39)
+  Global Optimization (Phase 40)
+  Global Optimization (Phase 41)
+  Global Optimization (Phase 42)
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fast.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fast_leakage.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fastz.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/slow.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/typical.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/typical_leakage.db'
+Loading db file '/home/IC/Desktop/DC_labs/ref/libs/mw_lib/sc/LM/sc_max.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+1
+dc_shell> report_clock
+Information: Updating graph... (UID-83)
+ 
+****************************************
+Report : clocks
+Design : MY_DESIGN
+Version: K-2015.06
+Date   : Fri May 22 15:24:28 2020
+****************************************
+
+Attributes:
+    d - dont_touch_network
+    f - fix_hold
+    p - propagated_clock
+    G - generated_clock
+    g - lib_generated_clock
+
+Clock          Period   Waveform            Attrs     Sources
+--------------------------------------------------------------------------------
+clk              3.00   {0 1.5}                       {clk}
+--------------------------------------------------------------------------------
+1
+dc_shell> report_clock -skew
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : clock_skew
+Design : MY_DESIGN
+Version: K-2015.06
+Date   : Fri May 22 15:24:39 2020
+****************************************
+
+                 Rise      Fall  Min Rise  Min fall        Uncertainty
+Object          Delay     Delay     Delay     Delay     Plus      Minus
+--------------------------------------------------------------------------------
+clk              0.30      0.30         -         -         -      0.15
+
+                 Max Source Latency                  Min Source Latency
+            Early    Early    Late    Late      Early    Early    Late    Late
+Object      Rise     Fall     Rise    Fall      Rise     Fall     Rise    Fall
+--------------------------------------------------------------------------------
+clk         0.70     0.70     0.70    0.70         -        -        -       -
+
+                 Max Transition      Min Transition
+[7m--More--[0m[A
+[KObject           Rise      Fall      Rise      Fall
+[7m--More--[0m[A
+[K-------------------------------------------------------
+[7m--More--[0m[A
+[Kclk              0.12      0.12      0.12      0.12
+1
+dc_shell> report_clock -skew -[K[K[K[K[Kverbose
+Error: unknown option '-verbose' (CMD-010)
+dc_shell> report_port -verbose
+ 
+****************************************
+Report : port
+        -verbose
+Design : MY_DESIGN
+Version: K-2015.06
+Date   : Fri May 22 15:24:57 2020
+****************************************
+
+
+                       Pin      Wire     Max     Max     Connection
+Port           Dir     Load     Load     Trans   Cap     Class      Attrs
+--------------------------------------------------------------------------------
+Cin1[0]        in      0.0000   0.0000   --      --      --         
+Cin1[1]        in      0.0000   0.0000   --      --      --         
+Cin1[2]        in      0.0000   0.0000   --      --      --         
+Cin1[3]        in      0.0000   0.0000   --      --      --         
+Cin1[4]        in      0.0000   0.0000   --      --      --         
+Cin2[0]        in      0.0000   0.0000   --      --      --         
+Cin2[1]        in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[KCin2[2]        in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[KCin2[3]        in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[KCin2[4]        in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kclk            in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kdata1[0]       in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kdata1[1]       in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kdata1[2]       in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kdata1[3]       in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kdata1[4]       in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kdata2[0]       in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kdata2[1]       in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kdata2[2]       in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kdata2[3]       in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kdata2[4]       in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Ksel            in      0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[KCout[0]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[KCout[1]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[KCout[2]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[KCout[3]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[KCout[4]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout1[0]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout1[1]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout1[2]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout1[3]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout1[4]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout2[0]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout2[1]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout2[2]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout2[3]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout2[4]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout3[0]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout3[1]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout3[2]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout3[3]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[Kout3[4]        out     0.0000   0.0000   --      --      --         
+[7m--More--[0m[A
+[K
+[7m--More--[0m[A
+[K
+[7m--More--[0m[A
+[K              External  Max             Min                Min       Min
+[7m--More--[0m[A
+[K              Number    Wireload        Wireload           Pin       Wire
+[7m--More--[0m[A
+[KPort          Points    Model           Model              Load      Load
+[7m--More--[0m[A
+[K--------------------------------------------------------------------------------
+[7m--More--[0m[A
+[KCin1[0]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCin1[1]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCin1[2]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCin1[3]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCin1[4]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCin2[0]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCin2[1]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCin2[2]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCin2[3]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCin2[4]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kclk                1      --              --              --        -- 
+[7m--More--[0m[A
+[Kdata1[0]           1      --              --              --        -- 
+[7m--More--[0m[A
+[Kdata1[1]           1      --              --              --        -- 
+[7m--More--[0m[A
+[Kdata1[2]           1      --              --              --        -- 
+[7m--More--[0m[A
+[Kdata1[3]           1      --              --              --        -- 
+[7m--More--[0m[A
+[Kdata1[4]           1      --              --              --        -- 
+[7m--More--[0m[A
+[Kdata2[0]           1      --              --              --        -- 
+[7m--More--[0m[A
+[Kdata2[1]           1      --              --              --        -- 
+[7m--More--[0m[A
+[Kdata2[2]           1      --              --              --        -- 
+[7m--More--[0m[A
+[Kdata2[3]           1      --              --              --        -- 
+[7m--More--[0m[A
+[Kdata2[4]           1      --              --              --        -- 
+[7m--More--[0m[A
+[Ksel                1      --              --              --        -- 
+[7m--More--[0m[A
+[KCout[0]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCout[1]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCout[2]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCout[3]            1      --              --              --        -- 
+[7m--More--[0m[A
+[KCout[4]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout1[0]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout1[1]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout1[2]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout1[3]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout1[4]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout2[0]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout2[1]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout2[2]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout2[3]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout2[4]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout3[0]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout3[1]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout3[2]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout3[3]            1      --              --              --        -- 
+[7m--More--[0m[A
+[Kout3[4]            1      --              --              --        -- 
+[7m--More--[0m[A
+[K
+[7m--More--[0m[A
+[K                    Input Delay
+[7m--More--[0m[A
+[K                  Min             Max       Related   Max
+[7m--More--[0m[A
+[KInput Port    Rise    Fall    Rise    Fall   Clock  Fanout
+[7m--More--[0m[A
+[K--------------------------------------------------------------------------------
+[7m--More--[0m[A
+[KCin1[0]       --      --      0.20    0.20  clk       --    
+[7m--More--[0m[A
+[KCin1[1]       --      --      0.20    0.20  clk       --    
+[7m--More--[0m[A
+[KCin1[2]       --      --      0.20    0.20  clk       --    
+[7m--More--[0m[A
+[KCin1[3]       --      --      0.20    0.20  clk       --    
+[7m--More--[0m[A
+[KCin1[4]       --      --      0.20    0.20  clk       --    
+[7m--More--[0m[A
+[KCin2[0]       --      --      0.20    0.20  clk       --    
+[7m--More--[0m[A
+[KCin2[1]       --      --      0.20    0.20  clk       --    
+[7m--More--[0m[A
+[KCin2[2]       --      --      0.20    0.20  clk       --    
+[7m--More--[0m[A
+[KCin2[3]       --      --      0.20    0.20  clk       --    
+[7m--More--[0m[A
+[KCin2[4]       --      --      0.20    0.20  clk       --    
+[7m--More--[0m[A
+[Kclk           --      --      --      --      --      -- 
+[7m--More--[0m[A
+[Kdata1[0]      --      --      0.45    0.45  clk       --    
+[7m--More--[0m[A
+[Kdata1[1]      --      --      0.45    0.45  clk       --    
+[7m--More--[0m[A
+[Kdata1[2]      --      --      0.45    0.45  clk       --    
+[7m--More--[0m[A
+[Kdata1[3]      --      --      0.45    0.45  clk       --    
+[7m--More--[0m[A
+[Kdata1[4]      --      --      0.45    0.45  clk       --    
+[7m--More--[0m[A
+[Kdata2[0]      --      --      0.45    0.45  clk       --    
+[7m--More--[0m[A
+[Kdata2[1]      --      --      0.45    0.45  clk       --    
+[7m--More--[0m[A
+[Kdata2[2]      --      --      0.45    0.45  clk       --    
+[7m--More--[0m[A
+[Kdata2[3]      --      --      0.45    0.45  clk       --    
+[7m--More--[0m[A
+[Kdata2[4]      --      --      0.45    0.45  clk       --    
+[7m--More--[0m[A
+[Ksel           --      --      0.40    0.40  clk       --    
+[7m--More--[0m[A
+[K
+[7m--More--[0m[A
+[K
+               Max Drive      Min Drive      Resistance    Min    Min       Cell[7m--More--[0m[A
+[K
+Input Port    Rise    Fall   Rise    Fall   Max     Min    Cap    Fanout    Deg[7m--More--[0m[A
+[K
+[7m--More--[0m[A
+[K--------------------------------------------------------------------------------
+Cin1[0]       --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+Cin1[1]       --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+Cin1[2]       --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+Cin1[3]       --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+Cin1[4]       --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+Cin2[0]       --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+Cin2[1]       --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+Cin2[2]       --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+Cin2[3]       --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+Cin2[4]       --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+clk           --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+data1[0]      --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+data1[1]      --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+data1[2]      --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+data1[3]      --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+data1[4]      --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+data2[0]      --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+data2[1]      --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+data2[2]      --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+data2[3]      --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+data2[4]      --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+sel           --      --     --      --     --      --     --     --        -- [7m--More--[0m[A
+[K
+[7m--More--[0m[A
+[K
+[7m--More--[0m[A
+[K
+[7m--More--[0m[A
+[K               Max Tran        Min Tran
+[7m--More--[0m[A
+[KInput Port    Rise    Fall    Rise    Fall
+[7m--More--[0m[A
+[K--------------------------------------------------------------------------------
+[7m--More--[0m[A
+[KCin1[0]       --      --      --      -- 
+[7m--More--[0m[A
+[KCin1[1]       --      --      --      -- 
+[7m--More--[0m[A
+[KCin1[2]       --      --      --      -- 
+[7m--More--[0m[A
+[KCin1[3]       --      --      --      -- 
+[7m--More--[0m[A
+[KCin1[4]       --      --      --      -- 
+[7m--More--[0m[A
+[KCin2[0]       --      --      --      -- 
+[7m--More--[0m[A
+[K1
+dc_shell> write_c[Kscrp[Kipt -out scripts/MY_DESIGN.con [K[K[Ksdc
+1
+dc_shell> write -fr[Kormat ddc -hier -out unmapped.MY[K[K[K/MY_DESIGN.ddc
+Writing ddc file 'unmapped/MY_DESIGN.ddc'.
+1
+dc_shell> write -format ddc -hier -out unmapped/MY_DESIGN.ddc[P [P [P [P-[1@v [P  [1@ -[1@v [1@e [1@r [1@i [1@l [1@o [1@g [66G[K[K[Kv
+Writing verilog file '/home/IC/Desktop/DC_labs/lab2/unmapped/MY_DESIGN.v'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+1
+dc_shell> exit
+
+Memory usage for main task 373 Mbytes.
+Memory usage for this session 373 Mbytes.
+CPU usage for this session 14 seconds ( 0.00 hours ).
+
+Thank you...

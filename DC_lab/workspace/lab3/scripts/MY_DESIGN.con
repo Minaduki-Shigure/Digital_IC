@@ -1,0 +1,32 @@
+#   CLOCK DEFINITION
+create_clock -period    3.0    [get_ports clk]
+set_clock_latency -source  -max   0.7     [get_clocks clk]
+set_clock_latency -max    0.3    [get_clocks clk]
+set_clock_uncertainty -setup    0.15    [get_clocks clk]
+set_clock_transition   0.12     [get_clocks clk]
+
+#   INPUT TIMING
+set_input_delay -max    0.45    -clock clk [get_ports data*]
+set_input_delay -max    0.4     -clock clk [get_ports sel]
+
+#   OUTPUT TIMING                 
+set_output_delay -max    0.5     -clock clk [get_ports out1]
+set_output_delay -max    2.04     -clock clk [get_ports out2]
+set_output_delay -max    0.4     -clock clk [get_ports out3]
+
+#   COMBINATIONAL LOGIC TIMING    
+set_input_delay -max    0.2    -clock clk [get_ports Cin*]
+set_output_delay -max    0.2    -clock clk [get_ports Cout]
+
+
+set_driving_cell -lib_cell bufbd1 -library cb13fs120_tsmc_max \
+ [remove_from_collection [all_inputs] [get_ports "clk Cin*"]]
+
+set_input_transition 0.12 [get_ports Cin*]
+
+set_load [expr 2 * {[load_of cb13fs120_tsmc_max/bufbd7/I]}] [get_ports out*]
+
+set_load 0.025  [get_ports Cout*]
+
+set_operating_conditions -max cb13fs120_tsmc_max
+

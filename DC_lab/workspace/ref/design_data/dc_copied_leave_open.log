@@ -1,0 +1,36 @@
+
+                        DC Professional (TM)
+                           DC Expert (TM)
+                            DC Ultra (TM)
+                       FloorPlan Manager (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                        Library Compiler (TM)
+                      DesignWare Developer (TM)
+                          DFT Compiler (TM)
+                            BSD Compiler
+                         Power Compiler (TM)
+
+           Version B-2008.09-SP2 for linux -- Nov 28, 2008
+              Copyright (c) 1988-2008 by Synopsys, Inc.
+                         ALL RIGHTS RESERVED
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+The above trademark notice does not imply that you are licensed to use 
+all of the listed products. You are licensed to use only those products 
+for which you have lawfully obtained a valid license key.
+
+Initializing...
+Starting shell in Topographical mode...
+Initializing gui preferences from file  /remote/training/home/brandall/.synopsys_dv_prefs.tcl
+Error: could not open script file "/remote/training/projects/Design_Compiler_2_DCT/Design_Compiler_2_DCT_2008.09/ref/design_data/./dc_scripts/dc_copied_leave_open.tcl" (CMD-015)
+dc_shell-topo> exot[K[Kit
+
+Memory usage for this session 36 Mbytes.
+CPU usage for this session 2 seconds.
+
+Thank you...

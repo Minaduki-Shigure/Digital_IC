@@ -1,0 +1,182 @@
+/////////////////////////////////////////////////////////////
+// Created by: Synopsys DC Ultra(TM) in wire load mode
+// Version   : K-2015.06
+// Date      : Fri May 22 13:57:33 2020
+/////////////////////////////////////////////////////////////
+
+
+module TOP ( Clk, Reset, Crnt_Instrn, Zro_Flag, Carry_Flag, Neg_Flag, 
+        Return_Addr, Current_State, PC );
+  input [31:0] Crnt_Instrn;
+  input [7:0] Return_Addr;
+  output [2:0] Current_State;
+  output [7:0] PC;
+  input Clk, Reset, Zro_Flag, Carry_Flag, Neg_Flag;
+  wire   \I_FSM/N32 , \I_FSM/N31 , \I_FSM/N30 , n37, n38, n39, n40, n41, n42,
+         n43, n44, n45, n46, n47, n48, n49, n50, n51, n52, n53, n54, n55, n56,
+         n57, n58, n60, n61, n62, n63, n64, n65, n66, n67, n68, n69, n70, n71,
+         n72, n73, n74, n75, n76, n77, n78, n79, n80, n81, n82, n83, n84, n85,
+         n86, n87, n88, n89, n90, n91, n92, n93, n94, n95, n96, n97, n98, n99,
+         n100, n101, n102, n103, n104, n105, n106, n107, n108, n109, n110,
+         n111, n112, n113, n114, n115, n116, n117, n118, n119, n120, n121,
+         n122, n123, n124, n125, n126, n127, n128, n129, n130, n131, n132,
+         n133, n134, n135, n136, n137, n138, n139, n140, n141, n142, n143,
+         n144, n145, n146, n147, n148, n149, n150, n151, n152, n153, n154,
+         n155, n156, n157, n158, n159, n160, n161, n162;
+
+  dfnrq1 \I_FSM/Current_State_reg[2]  ( .D(\I_FSM/N32 ), .CP(Clk), .Q(
+        Current_State[2]) );
+  dfnrq4 \I_COUNT/PCint_reg[6]  ( .D(n37), .CP(Clk), .Q(PC[6]) );
+  dfnrq4 \I_COUNT/PCint_reg[3]  ( .D(n40), .CP(Clk), .Q(PC[3]) );
+  dfnrq2 \I_FSM/Current_State_reg[0]  ( .D(\I_FSM/N30 ), .CP(Clk), .Q(
+        Current_State[0]) );
+  dfnrq4 \I_COUNT/PCint_reg[5]  ( .D(n38), .CP(Clk), .Q(PC[5]) );
+  dfnrq4 \I_COUNT/PCint_reg[1]  ( .D(n42), .CP(Clk), .Q(PC[1]) );
+  dfnrq4 \I_COUNT/PCint_reg[7]  ( .D(n44), .CP(Clk), .Q(PC[7]) );
+  dfnrq4 \I_COUNT/PCint_reg[2]  ( .D(n41), .CP(Clk), .Q(PC[2]) );
+  dfnrq4 \I_COUNT/PCint_reg[4]  ( .D(n39), .CP(Clk), .Q(PC[4]) );
+  dfnrq4 \I_COUNT/PCint_reg[0]  ( .D(n43), .CP(Clk), .Q(PC[0]) );
+  dfnrq1 \I_FSM/Current_State_reg[1]  ( .D(\I_FSM/N31 ), .CP(Clk), .Q(
+        Current_State[1]) );
+  nd02d1 U48 ( .A1(n51), .A2(Crnt_Instrn[0]), .ZN(n103) );
+  an02d2 U49 ( .A1(n92), .A2(n91), .Z(n48) );
+  inv0d1 U50 ( .I(Current_State[2]), .ZN(n104) );
+  invbd7 U51 ( .I(n45), .ZN(n53) );
+  nd02d2 U52 ( .A1(n114), .A2(n113), .ZN(n45) );
+  nd02d0 U53 ( .A1(n96), .A2(n106), .ZN(n99) );
+  inv0d1 U54 ( .I(PC[2]), .ZN(n152) );
+  inv0d1 U55 ( .I(PC[5]), .ZN(n133) );
+  inv0d1 U56 ( .I(PC[6]), .ZN(n127) );
+  inv0d1 U57 ( .I(PC[3]), .ZN(n146) );
+  inv0d1 U58 ( .I(PC[1]), .ZN(n157) );
+  inv0d1 U59 ( .I(PC[4]), .ZN(n139) );
+  inv0d1 U60 ( .I(n112), .ZN(n113) );
+  or02d1 U61 ( .A1(n99), .A2(n94), .Z(n112) );
+  an02d0 U62 ( .A1(n159), .A2(Return_Addr[0]), .Z(n97) );
+  inv0d1 U63 ( .I(n99), .ZN(n100) );
+  nd02d1 U64 ( .A1(n47), .A2(Crnt_Instrn[27]), .ZN(n96) );
+  an02d1 U65 ( .A1(n77), .A2(n84), .Z(n49) );
+  inv0d1 U66 ( .I(n93), .ZN(n47) );
+  nd02d1 U67 ( .A1(n78), .A2(Crnt_Instrn[25]), .ZN(n84) );
+  nd02d1 U68 ( .A1(n107), .A2(n89), .ZN(n93) );
+  xn02d1 U69 ( .A1(n137), .A2(n139), .ZN(n138) );
+  nd02d1 U70 ( .A1(n94), .A2(n106), .ZN(n158) );
+  nd02d1 U71 ( .A1(n74), .A2(n73), .ZN(n82) );
+  nd02d1 U72 ( .A1(n104), .A2(n106), .ZN(n111) );
+  nd02d1 U73 ( .A1(n107), .A2(Current_State[2]), .ZN(n94) );
+  nd02d1 U74 ( .A1(PC[1]), .A2(PC[0]), .ZN(n143) );
+  nd02d1 U75 ( .A1(Current_State[0]), .A2(Current_State[1]), .ZN(n110) );
+  an03d1 U76 ( .A1(n68), .A2(n67), .A3(n66), .Z(n75) );
+  inv0d1 U77 ( .I(Reset), .ZN(n106) );
+  nd02d1 U78 ( .A1(n46), .A2(n103), .ZN(n43) );
+  nr02d0 U79 ( .A1(n98), .A2(n97), .ZN(n46) );
+  nd02d1 U80 ( .A1(n53), .A2(n138), .ZN(n142) );
+  nd02d1 U81 ( .A1(n53), .A2(n132), .ZN(n136) );
+  nd02d1 U82 ( .A1(n53), .A2(n118), .ZN(n122) );
+  nd02d1 U83 ( .A1(n53), .A2(n145), .ZN(n149) );
+  nd02d1 U84 ( .A1(n53), .A2(n126), .ZN(n130) );
+  nd02d1 U85 ( .A1(n53), .A2(n151), .ZN(n155) );
+  nd02d1 U86 ( .A1(n53), .A2(n156), .ZN(n162) );
+  inv0d0 U87 ( .I(Crnt_Instrn[17]), .ZN(n69) );
+  inv0d0 U88 ( .I(n78), .ZN(n79) );
+  inv0d0 U89 ( .I(n143), .ZN(n150) );
+  inv0d0 U90 ( .I(Crnt_Instrn[19]), .ZN(n61) );
+  an02d0 U91 ( .A1(Crnt_Instrn[25]), .A2(Carry_Flag), .Z(n71) );
+  inv0d0 U92 ( .I(Crnt_Instrn[21]), .ZN(n63) );
+  inv0d0 U93 ( .I(Crnt_Instrn[16]), .ZN(n62) );
+  inv0d0 U94 ( .I(n84), .ZN(n85) );
+  inv0d0 U95 ( .I(n82), .ZN(n88) );
+  nr02d0 U96 ( .A1(n80), .A2(n83), .ZN(n81) );
+  inv0d0 U97 ( .I(n77), .ZN(n80) );
+  an02d1 U98 ( .A1(n48), .A2(n100), .Z(n101) );
+  xn02d1 U99 ( .A1(n150), .A2(n152), .ZN(n151) );
+  xr02d1 U100 ( .A1(n117), .A2(PC[7]), .Z(n118) );
+  an02d0 U101 ( .A1(n116), .A2(n137), .Z(n117) );
+  inv0d0 U102 ( .I(PC[7]), .ZN(n119) );
+  xn02d1 U103 ( .A1(n157), .A2(PC[0]), .ZN(n156) );
+  xr02d1 U104 ( .A1(n131), .A2(n133), .Z(n132) );
+  xr02d1 U105 ( .A1(n144), .A2(n146), .Z(n145) );
+  xr02d1 U106 ( .A1(n125), .A2(n127), .Z(n126) );
+  inv0d0 U107 ( .I(n123), .ZN(n124) );
+  inv0d0 U108 ( .I(n110), .ZN(n105) );
+  inv0d0 U109 ( .I(Current_State[0]), .ZN(n108) );
+  inv0d0 U110 ( .I(n111), .ZN(n109) );
+  an02d1 U111 ( .A1(n54), .A2(n102), .Z(n50) );
+  nd02d2 U112 ( .A1(n51), .A2(Crnt_Instrn[7]), .ZN(n120) );
+  nd02d2 U113 ( .A1(n51), .A2(Crnt_Instrn[6]), .ZN(n128) );
+  nd02d2 U114 ( .A1(n51), .A2(Crnt_Instrn[5]), .ZN(n134) );
+  nd02d2 U115 ( .A1(n51), .A2(Crnt_Instrn[4]), .ZN(n140) );
+  nd02d2 U116 ( .A1(n51), .A2(Crnt_Instrn[3]), .ZN(n147) );
+  nd02d2 U117 ( .A1(n51), .A2(Crnt_Instrn[2]), .ZN(n153) );
+  nd02d2 U118 ( .A1(n51), .A2(Crnt_Instrn[1]), .ZN(n160) );
+  invbd7 U119 ( .I(n56), .ZN(n51) );
+  nd02d2 U120 ( .A1(n52), .A2(n48), .ZN(n55) );
+  nd02d1 U121 ( .A1(n52), .A2(n101), .ZN(n58) );
+  nd02d2 U122 ( .A1(Neg_Flag), .A2(n81), .ZN(n52) );
+  nd02d2 U123 ( .A1(n54), .A2(n102), .ZN(n114) );
+  invbd2 U124 ( .I(n55), .ZN(n54) );
+  nd02d2 U125 ( .A1(n102), .A2(n57), .ZN(n56) );
+  invbd2 U126 ( .I(n58), .ZN(n57) );
+  nd02d2 U127 ( .A1(n60), .A2(n49), .ZN(n102) );
+  inv0d1 U128 ( .I(Neg_Flag), .ZN(n60) );
+  nr03d0 U129 ( .A1(n61), .A2(n69), .A3(Crnt_Instrn[23]), .ZN(n65) );
+  nr04d0 U130 ( .A1(n63), .A2(n62), .A3(Crnt_Instrn[25]), .A4(Crnt_Instrn[22]), 
+        .ZN(n64) );
+  nd04d0 U131 ( .A1(Crnt_Instrn[20]), .A2(n65), .A3(n64), .A4(Crnt_Instrn[18]), 
+        .ZN(n74) );
+  nr02d0 U132 ( .A1(Crnt_Instrn[18]), .A2(Crnt_Instrn[19]), .ZN(n68) );
+  nr02d0 U133 ( .A1(Crnt_Instrn[21]), .A2(Crnt_Instrn[20]), .ZN(n67) );
+  nr02d0 U134 ( .A1(Crnt_Instrn[22]), .A2(Crnt_Instrn[23]), .ZN(n66) );
+  nr02d0 U135 ( .A1(Carry_Flag), .A2(Crnt_Instrn[25]), .ZN(n70) );
+  nr04d0 U136 ( .A1(n71), .A2(n70), .A3(Crnt_Instrn[16]), .A4(n69), .ZN(n72)
+         );
+  nd02d0 U137 ( .A1(n75), .A2(n72), .ZN(n73) );
+  nr02d0 U138 ( .A1(n82), .A2(Crnt_Instrn[16]), .ZN(n77) );
+  inv0d1 U139 ( .I(n75), .ZN(n76) );
+  nr02d0 U140 ( .A1(n76), .A2(Crnt_Instrn[17]), .ZN(n78) );
+  nr02d0 U141 ( .A1(n79), .A2(Crnt_Instrn[25]), .ZN(n83) );
+  nd02d0 U142 ( .A1(n83), .A2(Zro_Flag), .ZN(n87) );
+  nd12d0 U143 ( .A1(Zro_Flag), .A2(n85), .ZN(n86) );
+  nd04d0 U144 ( .A1(n88), .A2(n87), .A3(n86), .A4(Crnt_Instrn[16]), .ZN(n92)
+         );
+  nr02d0 U145 ( .A1(Current_State[0]), .A2(Current_State[1]), .ZN(n107) );
+  nr03d0 U146 ( .A1(n104), .A2(Crnt_Instrn[31]), .A3(Crnt_Instrn[30]), .ZN(n89) );
+  nr02d0 U147 ( .A1(Crnt_Instrn[28]), .A2(Crnt_Instrn[29]), .ZN(n90) );
+  nr02d0 U148 ( .A1(n93), .A2(n90), .ZN(n91) );
+  mx02d0 U149 ( .I0(n112), .I1(n158), .S(PC[0]), .Z(n95) );
+  nr02d0 U150 ( .A1(n50), .A2(n95), .ZN(n98) );
+  nr02d0 U151 ( .A1(n96), .A2(Reset), .ZN(n159) );
+  nr03d0 U152 ( .A1(n107), .A2(n105), .A3(n111), .ZN(\I_FSM/N31 ) );
+  aor22d1 U153 ( .A1(n109), .A2(n108), .B1(n107), .B2(n106), .Z(\I_FSM/N30 )
+         );
+  nr02d0 U154 ( .A1(n111), .A2(n110), .ZN(\I_FSM/N32 ) );
+  nd02d0 U155 ( .A1(PC[4]), .A2(PC[5]), .ZN(n123) );
+  nr02d0 U156 ( .A1(n123), .A2(n127), .ZN(n116) );
+  nd02d0 U157 ( .A1(PC[2]), .A2(PC[3]), .ZN(n115) );
+  nr02d0 U158 ( .A1(n115), .A2(n143), .ZN(n137) );
+  aoim22d1 U159 ( .A1(n159), .A2(Return_Addr[7]), .B1(n158), .B2(n119), .Z(
+        n121) );
+  nd03d0 U160 ( .A1(n122), .A2(n121), .A3(n120), .ZN(n44) );
+  nd02d0 U161 ( .A1(n137), .A2(n124), .ZN(n125) );
+  aoim22d1 U162 ( .A1(n159), .A2(Return_Addr[6]), .B1(n158), .B2(n127), .Z(
+        n129) );
+  nd03d0 U163 ( .A1(n130), .A2(n129), .A3(n128), .ZN(n37) );
+  nd02d0 U164 ( .A1(n137), .A2(PC[4]), .ZN(n131) );
+  aoim22d1 U165 ( .A1(n159), .A2(Return_Addr[5]), .B1(n158), .B2(n133), .Z(
+        n135) );
+  nd03d0 U166 ( .A1(n136), .A2(n135), .A3(n134), .ZN(n38) );
+  aoim22d1 U167 ( .A1(n159), .A2(Return_Addr[4]), .B1(n158), .B2(n139), .Z(
+        n141) );
+  nd03d0 U168 ( .A1(n142), .A2(n141), .A3(n140), .ZN(n39) );
+  nd02d0 U169 ( .A1(n150), .A2(PC[2]), .ZN(n144) );
+  aoim22d1 U170 ( .A1(n159), .A2(Return_Addr[3]), .B1(n158), .B2(n146), .Z(
+        n148) );
+  nd03d0 U171 ( .A1(n149), .A2(n148), .A3(n147), .ZN(n40) );
+  aoim22d1 U172 ( .A1(n159), .A2(Return_Addr[2]), .B1(n158), .B2(n152), .Z(
+        n154) );
+  nd03d0 U173 ( .A1(n155), .A2(n154), .A3(n153), .ZN(n41) );
+  aoim22d1 U174 ( .A1(n159), .A2(Return_Addr[1]), .B1(n158), .B2(n157), .Z(
+        n161) );
+  nd03d0 U175 ( .A1(n162), .A2(n161), .A3(n160), .ZN(n42) );
+endmodule
+
