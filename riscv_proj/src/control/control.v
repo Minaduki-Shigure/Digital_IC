@@ -32,8 +32,8 @@ module control(
     output reg sel,
     input [2:0] opcode,
     input zero,
-    input clock,
-    input reset
+    input clk,
+    input rst
 );
 
 parameter 
@@ -48,9 +48,9 @@ parameter
 
 reg [2:0] state;
 
-always @ (posedge clock or negedge reset)
+always @ (posedge clk or negedge rst)
 begin
-    if (!reset)
+    if (!rst)
     begin
         state <= 3'b000;
         {rd, wr, ld_ir, ld_acc, ld_pc, inc_pc, halt, data_e, sel} <= 9'b0;

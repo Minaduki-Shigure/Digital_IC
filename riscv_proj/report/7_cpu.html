@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>实验七 综合验证</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="%e5%ae%9e%e9%aa%8c%e4%b8%83-%e7%bb%bc%e5%90%88%e9%aa%8c%e8%af%81">实验七 综合验证</h1>
+<p>Copyright (c) 2020 Minaduki Shigure.<br>
+专业：电子科学与技术<br>
+学号：171180571<br>
+姓名：吴康正</p>
+<h2 id="%e5%ae%9e%e9%aa%8c%e6%ba%90%e7%a0%81">实验源码</h2>
+<p>使用提供的代码进行综合验证。</p>
+<h2 id="%e6%b5%8b%e8%af%95%e7%bb%93%e6%9e%9c">测试结果</h2>
+<p>测试一结果：</p>
+<pre><code class="language-plain"><code><div>#   *************************************************************
+#   *        THE FOLLOWING DEBUG TASKS ARE AVAILABLE:             *
+#   *  load the 1st diagnostic program, then continue simulation. *
+# 
+# ***		RUNNING CPUtest1	 ***
+# *** (THIS TEST SHOULD HALT WITH PC = 17) ***
+# 
+#  PC    INSTR    OP   DATA   ADR
+#  --    -----    --   ----   ---
+#  xx     HLT      0    zz     00
+#  00     JMP      7    fe     00
+#  1e     JMP      7    e3     1e
+#  03     LDA      5    ba     03
+#  04     SKZ      1    20     04
+#  06     LDA      5    bb     06
+#  07     SKZ      1    20     07
+#  08     JMP      7    ea     08
+#  0a     STO      6    dc     0a
+#  0b     LDA      5    ba     0b
+#  0c     STO      6    dc     0c
+#  0d     LDA      5    bc     0d
+#  0e     SKZ      1    20     0e
+#  10     XOR      4    9b     10
+#  11     SKZ      1    20     11
+#  12     JMP      7    f4     12
+#  14     XOR      4    9b     14
+#  15     SKZ      1    20     15
+#  17     HLT      0    00     17
+# 
+# ***   A HALT INSTRUCTION WAS PROCESSED	 ***
+</div></code></code></pre>
+<p>测试二结果：</p>
+<pre><code class="language-plain"><code><div># ***		RUNNING CPUtest2	 ***
+# *** (THIS TEST SHOULD HALT WITH PC = 10) ***
+# 
+#  PC    INSTR    OP   DATA   ADR
+#  --    -----    --   ----   ---
+#  xx     HLT      0    zz     00
+#  00     LDA      5    bb     00
+#  01     AND      3    7c     01
+#  02     XOR      4    9b     02
+#  03     SKZ      1    20     03
+#  05     ADD      2    5a     05
+#  06     SKZ      1    20     06
+#  07     JMP      7    e9     07
+#  09     XOR      4    9c     09
+#  0a     ADD      2    5a     0a
+#  0b     STO      6    dd     0b
+#  0c     LDA      5    ba     0c
+#  0d     ADD      2    5d     0d
+#  0e     SKZ      1    20     0e
+#  10     HLT      0    00     10
+# 
+# ***   A HALT INSTRUCTION WAS PROCESSED	 ***
+</div></code></code></pre>
+<p>测试三结果：</p>
+<pre><code class="language-plain"><code><div># ***		RUNNING CPUtest3	 ***
+# ***  This program calculates the fibonacci  ***
+# ***  number sequence from 0 to 144          ***
+# 
+#  	 FIBONACCI NUMBER
+#  	 ----------------
+# 		  0
+# 		  1
+# 		  1
+# 		  2
+# 		  3
+# 		  5
+# 		  8
+# 		 13
+# 		 21
+# 		 34
+# 		 55
+# 		 89
+# 		144
+# 
+# ***   A HALT INSTRUCTION WAS PROCESSED	 ***
+</div></code></code></pre>
+<p>测试结果表明，模块设计正确，各个功能工作正常。</p>
+
+    </body>
+    </html>
