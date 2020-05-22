@@ -1,0 +1,384 @@
+[IC@IC lab1]$ dc_shell-t 
+                                        
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+                                        
+                 Version K-2015.06 for linux64 - May 28, 2015 
+                                        
+                    Copyright (c) 1988 - 2015 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+            or distribution of this software is strictly prohibited.
+Initializing...
+Initializing gui preferences from file  /home/IC/.synopsys_dv_prefs.tcl
+dc_shell> source common_setup.tcl
+sc.sdb
+dc_shell> source dc_setup.tcl 
+sc.sdb
+dc_shell> read_verilog rtl/TOP.v
+Loading db file '/home/IC/Desktop/DC_labs/ref/libs/mw_lib/sc/LM/sc_max.db'
+Loading db file '/opt/Synopsys/Synplify2015/libraries/syn/gtech.db'
+Loading db file '/opt/Synopsys/Synplify2015/libraries/syn/standard.sldb'
+  Loading link library 'cb13fs120_tsmc_max'
+  Loading link library 'gtech'
+Loading verilog file '/home/IC/Desktop/DC_labs/lab1/rtl/TOP.v'
+Detecting input file type automatically (-rtl or -netlist).
+Reading with Presto HDL Compiler (equivalent to -rtl option).
+Running PRESTO HDLC
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fast.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fast_leakage.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fastz.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/slow.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/typical.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/typical_leakage.db'
+Compiling source file /home/IC/Desktop/DC_labs/lab1/rtl/TOP.v
+
+Statistics for case statements in always block at line 63 in file
+	'/home/IC/Desktop/DC_labs/lab1/rtl/TOP.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            64            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine FSM line 87 in file
+		'/home/IC/Desktop/DC_labs/lab1/rtl/TOP.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  Current_State_reg  | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+
+Statistics for case statements in always block at line 126 in file
+	'/home/IC/Desktop/DC_labs/lab1/rtl/TOP.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           160            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine COUNT line 207 in file
+		'/home/IC/Desktop/DC_labs/lab1/rtl/TOP.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      PCint_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Current design is now '/home/IC/Desktop/DC_labs/lab1/rtl/TOP.db:TOP'
+Loaded 4 designs.
+Current design is 'TOP'.
+TOP FSM DECODE COUNT
+dc_shell> source scripts/TOP.con
+Current design is 'TOP'.
+1
+dc_shell> compile_ultra
+Information: Performing power optimization. (PWR-850)
+Alib files are up-to-date.
+Loading db file '/opt/Synopsys/Synplify2015/libraries/syn/dw_foundation.sldb'
+Warning: DesignWare synthetic library dw_foundation.sldb is added to the synthetic_library in the current command. (UISN-40)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | K-2015.06-DWBB_201506.0 |     *     |
+| Licensed DW Building Blocks        | K-2015.06-DWBB_201506.0 |     *     |
+| fast                               | 1.300000                |           |
+| fast_leakage                       | 1.300000                |           |
+| fastz                              | 1.300000                |           |
+| slow                               | 1.300000                |           |
+| typical                            | 1.300000                |           |
+| typical_leakage                    | 1.300000                |           |
+============================================================================
+
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 19 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+Loaded alib file './alib-52/sc_max.db.alib'
+  Building model 'DW01_NAND2'
+Information: Ungrouping hierarchy I_FSM before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy I_DECODE before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy I_COUNT before Pass 1 (OPT-776)
+Information: Ungrouping 3 of 4 hierarchies before Pass 1 (OPT-775)
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'TOP'
+ Implement Synthetic for 'TOP'.
+Memory usage for J1 task 342 Mbytes -- main task 342 Mbytes.
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+Information: Added key list 'DesignWare' to design 'TOP'. (DDB-72)
+
+  Beginning Constant Register Removal
+  -----------------------------------
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+  Global Optimization (Phase 30)
+
+  Beginning Isolate Ports
+  -----------------------
+
+  Beginning Delay Optimization
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:03     241.9      0.25       2.0       0.0                           1117123.3750
+    0:00:04     258.7      0.11       0.9       0.0                           1276260.5000
+    0:00:04     258.7      0.11       0.9       0.0                           1276260.5000
+    0:00:04     259.2      0.11       0.9       0.0                           1283273.2500
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:00:05     249.3      0.16       1.2       0.0                           1215297.6250
+    0:00:05     247.6      0.16       1.2       0.0                           1200976.3750
+    0:00:05     247.6      0.16       1.2       0.0                           1200976.3750
+    0:00:05     261.5      0.07       0.5       0.0                           1326369.8750
+    0:00:05     261.5      0.07       0.5       0.0                           1326369.8750
+    0:00:05     263.0      0.06       0.4       0.0                           1339728.6250
+    0:00:05     263.0      0.06       0.4       0.0                           1339728.6250
+    0:00:05     268.7      0.05       0.4       0.0                           1406563.2500
+    0:00:05     268.7      0.05       0.4       0.0                           1406563.2500
+    0:00:05     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:05     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:05     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:05     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:05     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:05     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:06     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:06     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:06     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:06     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:06     285.2      0.05       0.4       0.0                           1598768.2500
+    0:00:06     285.9      0.04       0.3       0.0                           1602088.8750
+    0:00:06     285.9      0.04       0.3       0.0                           1602088.8750
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:06     285.9      0.04       0.3       0.0                           1602088.8750
+  Global Optimization (Phase 31)
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+  Global Optimization (Phase 39)
+  Global Optimization (Phase 40)
+  Global Optimization (Phase 41)
+  Global Optimization (Phase 42)
+  Global Optimization (Phase 43)
+    0:00:07     261.7      0.04       0.3       0.0                           1297020.8750
+    0:00:07     263.9      0.04       0.3       0.0                           1321825.0000
+    0:00:07     263.9      0.04       0.3       0.0                           1321825.0000
+    0:00:07     263.9      0.04       0.3       0.0                           1323410.7500
+    0:00:07     263.9      0.04       0.3       0.0                           1323410.7500
+    0:00:07     263.9      0.04       0.3       0.0                           1323410.7500
+    0:00:07     263.9      0.04       0.3       0.0                           1323410.7500
+    0:00:07     263.9      0.04       0.3       0.0                           1323410.7500
+    0:00:07     263.9      0.04       0.3       0.0                           1323410.7500
+    0:00:07     263.9      0.04       0.3       0.0                           1323410.7500
+    0:00:07     263.9      0.04       0.3       0.0                           1323410.7500
+    0:00:10     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:10     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:10     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:10     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:13     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:13     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:13     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:13     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:16     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:16     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:16     264.9      0.04       0.3       0.0                           1332811.0000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:16     264.9      0.04       0.3       0.0                           1332811.0000
+    0:00:17     260.9      0.04       0.4       0.0                           1310758.2500
+    0:00:17     260.9      0.04       0.4       0.0                           1310758.2500
+    0:00:17     260.9      0.04       0.4       0.0                           1310758.2500
+    0:00:17     260.9      0.04       0.4       0.0                           1310758.2500
+    0:00:17     260.7      0.04       0.4       0.0                           1307678.6250
+    0:00:19     262.2      0.04       0.3       0.0                           1336527.0000
+    0:00:19     262.2      0.04       0.3       0.0                           1336527.0000
+    0:00:19     262.2      0.04       0.3       0.0                           1336527.0000
+    0:00:19     260.4      0.04       0.3       0.0                           1322148.7500
+Loading db file '/home/IC/Desktop/DC_labs/ref/libs/mw_lib/sc/LM/sc_max.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+1
+dc_shell> report_constraint -all_violators 
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : constraint
+        -all_violators
+Design : TOP
+Version: K-2015.06
+Date   : Fri May 22 13:56:44 2020
+****************************************
+
+
+   max_delay/setup ('Clk' group)
+
+                             Required        Actual
+   Endpoint                 Path Delay     Path Delay        Slack
+   -----------------------------------------------------------------
+   I_COUNT/PCint_reg[1]/D       1.71           1.75 r        -0.04  (VIOLATED)
+   I_COUNT/PCint_reg[2]/D       1.71           1.75 r        -0.04  (VIOLATED)
+   I_COUNT/PCint_reg[3]/D       1.71           1.75 r        -0.04  (VIOLATED)
+   I_COUNT/PCint_reg[4]/D       1.71           1.75 r        -0.04  (VIOLATED)
+   I_COUNT/PCint_reg[5]/D       1.71           1.75 r        -0.04  (VIOLATED)
+   I_COUNT/PCint_reg[6]/D       1.71           1.75 r        -0.04  (VIOLATED)
+   I_COUNT/PCint_reg[7]/D       1.71           1.75 r        -0.04  (VIOLATED)
+   I_COUNT/PCint_reg[0]/D       1.72           1.75 f        -0.03  (VIOLATED)
+
+
+   max_leakage_power
+
+                             Required        Actual
+   Design                   Leakage Power  Leakage Power     Slack
+   -----------------------------------------------------------------
+   TOP                          0.00       1517840.25     -1517840.25
+                                                                    (VIOLATED)
+
+
+1
+dc_shell> report_timing
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : TOP
+Version: K-2015.06
+Date   : Fri May 22 13:56:54 2020
+****************************************
+
+Operating Conditions: cb13fs120_tsmc_max   Library: cb13fs120_tsmc_max
+Wire Load Model Mode: enclosed
+
+  Startpoint: Neg_Flag (input port clocked by Clk)
+  Endpoint: I_COUNT/PCint_reg[1]
+            (rising edge-triggered flip-flop clocked by Clk)
+  Path Group: Clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  TOP                8000                  cb13fs120_tsmc_max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock Clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  input external delay                     1.20       1.20 f
+  Neg_Flag (in)                            0.06       1.26 f
+  U128/ZN (inv0d1)                         0.07       1.33 r
+  U127/ZN (nd02d2)                         0.09       1.42 f
+  U123/ZN (nd02d2)                         0.07       1.48 r
+  U52/ZN (nd02d2)                          0.09       1.57 f
+  U51/ZN (invbd7)                          0.05       1.62 r
+  U86/ZN (nd02d1)                          0.05       1.67 f
+  U175/ZN (nd03d0)                         0.08       1.75 r
+  I_COUNT/PCint_reg[1]/D (dfnrq4)          0.00       1.75 r
+  data arrival time                                   1.75
+
+  clock Clk (rise edge)                    2.00       2.00
+  clock network delay (ideal)              0.00       2.00
+  clock uncertainty                       -0.20       1.80
+  I_COUNT/PCint_reg[1]/CP (dfnrq4)         0.00       1.80 r
+  library setup time                      -0.09       1.71
+  data required time                                  1.71
+  -----------------------------------------------------------
+  data required time                                  1.71
+  data arrival time                                  -1.75
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -0.04
+
+
+1
+dc_shell> 
+dc_shell> write -format verilog -hier -output mapped/TOP.gv
+Writing verilog file '/home/IC/Desktop/DC_labs/lab1/mapped/TOP.gv'.
+1
+dc_shell> write -format ddc -hier -output mapped/TOP.ddc
+Writing ddc file 'mapped/TOP.ddc'.
+1
+dc_shell> remove_design -designs 
+Removing design 'TOP'
+1
+

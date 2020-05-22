@@ -1,0 +1,487 @@
+dc_shell> check_timing
+Information: Changed wire load model for 'ARITH' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'COMBO' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'ARITH' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_sub_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*SUB_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_sub_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*SUB_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_add_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*ADD_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for 'DW01_sub_width5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Changed wire load model for '*SUB_UNS_OP_5_5_5' from '(none)' to 'ForQA'. (OPT-170)
+Information: Updating design information... (UID-85)
+
+Information: Checking generated_clocks...
+
+Information: Checking loops...
+
+Information: Checking no_input_delay...
+
+Information: Checking unconstrained_endpoints...
+
+Information: Checking pulse_clock_cell_type...
+
+Information: Checking no_driving_cell...
+
+Information: Checking partial_input_delay...
+Warning: there are 21 input ports that only have partial input delay specified. (TIM-212)
+--------------------
+Cin1[4]
+Cin1[3]
+Cin1[2]
+Cin1[1]
+Cin1[0]
+Cin2[4]
+Cin2[3]
+Cin2[2]
+Cin2[1]
+Cin2[0]
+data1[4]
+data1[3]
+data1[2]
+data1[1]
+data1[0]
+data2[4]
+data2[3]
+data2[2]
+data2[1]
+data2[0]
+sel
+1
+dc_shell> 
+dc_shell> compile_ultra
+Information: Performing power optimization. (PWR-850)
+Alib files are up-to-date.
+Loading db file '/opt/Synopsys/Synplify2015/libraries/syn/dw_foundation.sldb'
+Warning: DesignWare synthetic library dw_foundation.sldb is added to the synthetic_library in the current command. (UISN-40)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | K-2015.06-DWBB_201506.0 |     *     |
+| Licensed DW Building Blocks        | K-2015.06-DWBB_201506.0 |     *     |
+| fast                               | 1.300000                |           |
+| fast_leakage                       | 1.300000                |           |
+| fastz                              | 1.300000                |           |
+| slow                               | 1.300000                |           |
+| typical                            | 1.300000                |           |
+| typical_leakage                    | 1.300000                |           |
+============================================================================
+
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 2 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+Loaded alib file './alib-52/sc_max.db.alib'
+  Building model 'DW01_NAND2'
+Information: Ungrouping hierarchy U1_ARITH before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy U_COMBO before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy U_COMBO/U2_ARITH before Pass 1 (OPT-776)
+Information: Ungrouping 3 of 4 hierarchies before Pass 1 (OPT-775)
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'MY_DESIGN'
+ Implement Synthetic for 'MY_DESIGN'.
+Memory usage for J1 task 373 Mbytes -- main task 373 Mbytes.
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+Information: Added key list 'DesignWare' to design 'MY_DESIGN'. (DDB-72)
+Information: In design 'MY_DESIGN', the register 'R3_reg[0]' is removed because it is merged to 'R1_reg[0]'. (OPT-1215)
+
+  Beginning Constant Register Removal
+  -----------------------------------
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+
+  Beginning Isolate Ports
+  -----------------------
+
+  Beginning Delay Optimization
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:07     326.9      0.00       0.0       0.0                           1667559.3750
+    0:00:07     326.9      0.00       0.0       0.0                           1667559.3750
+    0:00:07     326.9      0.00       0.0       0.0                           1667559.3750
+    0:00:07     326.9      0.00       0.0       0.0                           1667559.3750
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:00:07     326.9      0.00       0.0       0.0                           1664906.7500
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:07     326.9      0.00       0.0       0.0                           1654488.6250
+  Global Optimization (Phase 30)
+  Global Optimization (Phase 31)
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+  Global Optimization (Phase 39)
+  Global Optimization (Phase 40)
+  Global Optimization (Phase 41)
+  Global Optimization (Phase 42)
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+    0:00:07     326.4      0.00       0.0       0.0                           1571339.6250
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fast.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fast_leakage.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/fastz.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/slow.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/typical.db'
+Loading db file '/opt/Foundary_Library/TSMC90/aci/sc-x/synopsys/typical_leakage.db'
+Loading db file '/home/IC/Desktop/DC_labs/ref/libs/mw_lib/sc/LM/sc_max.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+1
+dc_shell> report_clock
+Information: Updating graph... (UID-83)
+ 
+****************************************
+Report : clocks
+Design : MY_DESIGN
+Version: K-2015.06
+Date   : Fri May 22 15:24:28 2020
+****************************************
+
+Attributes:
+    d - dont_touch_network
+    f - fix_hold
+    p - propagated_clock
+    G - generated_clock
+    g - lib_generated_clock
+
+Clock          Period   Waveform            Attrs     Sources
+--------------------------------------------------------------------------------
+clk              3.00   {0 1.5}                       {clk}
+--------------------------------------------------------------------------------
+1
+dc_shell> report_clock -skew
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : clock_skew
+Design : MY_DESIGN
+Version: K-2015.06
+Date   : Fri May 22 15:24:39 2020
+****************************************
+
+                 Rise      Fall  Min Rise  Min fall        Uncertainty
+Object          Delay     Delay     Delay     Delay     Plus      Minus
+--------------------------------------------------------------------------------
+clk              0.30      0.30         -         -         -      0.15
+
+                 Max Source Latency                  Min Source Latency
+            Early    Early    Late    Late      Early    Early    Late    Late
+Object      Rise     Fall     Rise    Fall      Rise     Fall     Rise    Fall
+--------------------------------------------------------------------------------
+clk         0.70     0.70     0.70    0.70         -        -        -       -
+
+                 Max Transition      Min Transition
+Object           Rise      Fall      Rise      Fall
+-------------------------------------------------------
+clk              0.12      0.12      0.12      0.12
+1
+dc_shell> report_clock -verbose
+Error: unknown option '-verbose' (CMD-010)
+dc_shell> report_port -verbose
+ 
+****************************************
+Report : port
+        -verbose
+Design : MY_DESIGN
+Version: K-2015.06
+Date   : Fri May 22 15:24:57 2020
+****************************************
+
+
+                       Pin      Wire     Max     Max     Connection
+Port           Dir     Load     Load     Trans   Cap     Class      Attrs
+--------------------------------------------------------------------------------
+Cin1[0]        in      0.0000   0.0000   --      --      --         
+Cin1[1]        in      0.0000   0.0000   --      --      --         
+Cin1[2]        in      0.0000   0.0000   --      --      --         
+Cin1[3]        in      0.0000   0.0000   --      --      --         
+Cin1[4]        in      0.0000   0.0000   --      --      --         
+Cin2[0]        in      0.0000   0.0000   --      --      --         
+Cin2[1]        in      0.0000   0.0000   --      --      --         
+Cin2[2]        in      0.0000   0.0000   --      --      --         
+Cin2[3]        in      0.0000   0.0000   --      --      --         
+Cin2[4]        in      0.0000   0.0000   --      --      --         
+clk            in      0.0000   0.0000   --      --      --         
+data1[0]       in      0.0000   0.0000   --      --      --         
+data1[1]       in      0.0000   0.0000   --      --      --         
+data1[2]       in      0.0000   0.0000   --      --      --         
+data1[3]       in      0.0000   0.0000   --      --      --         
+data1[4]       in      0.0000   0.0000   --      --      --         
+data2[0]       in      0.0000   0.0000   --      --      --         
+data2[1]       in      0.0000   0.0000   --      --      --         
+data2[2]       in      0.0000   0.0000   --      --      --         
+data2[3]       in      0.0000   0.0000   --      --      --         
+data2[4]       in      0.0000   0.0000   --      --      --         
+sel            in      0.0000   0.0000   --      --      --         
+Cout[0]        out     0.0000   0.0000   --      --      --         
+Cout[1]        out     0.0000   0.0000   --      --      --         
+Cout[2]        out     0.0000   0.0000   --      --      --         
+Cout[3]        out     0.0000   0.0000   --      --      --         
+Cout[4]        out     0.0000   0.0000   --      --      --         
+out1[0]        out     0.0000   0.0000   --      --      --         
+out1[1]        out     0.0000   0.0000   --      --      --         
+out1[2]        out     0.0000   0.0000   --      --      --         
+out1[3]        out     0.0000   0.0000   --      --      --         
+out1[4]        out     0.0000   0.0000   --      --      --         
+out2[0]        out     0.0000   0.0000   --      --      --         
+out2[1]        out     0.0000   0.0000   --      --      --         
+out2[2]        out     0.0000   0.0000   --      --      --         
+out2[3]        out     0.0000   0.0000   --      --      --         
+out2[4]        out     0.0000   0.0000   --      --      --         
+out3[0]        out     0.0000   0.0000   --      --      --         
+out3[1]        out     0.0000   0.0000   --      --      --         
+out3[2]        out     0.0000   0.0000   --      --      --         
+out3[3]        out     0.0000   0.0000   --      --      --         
+out3[4]        out     0.0000   0.0000   --      --      --         
+
+
+              External  Max             Min                Min       Min
+              Number    Wireload        Wireload           Pin       Wire
+Port          Points    Model           Model              Load      Load
+--------------------------------------------------------------------------------
+Cin1[0]            1      --              --              --        -- 
+Cin1[1]            1      --              --              --        -- 
+Cin1[2]            1      --              --              --        -- 
+Cin1[3]            1      --              --              --        -- 
+Cin1[4]            1      --              --              --        -- 
+Cin2[0]            1      --              --              --        -- 
+Cin2[1]            1      --              --              --        -- 
+Cin2[2]            1      --              --              --        -- 
+Cin2[3]            1      --              --              --        -- 
+Cin2[4]            1      --              --              --        -- 
+clk                1      --              --              --        -- 
+data1[0]           1      --              --              --        -- 
+data1[1]           1      --              --              --        -- 
+data1[2]           1      --              --              --        -- 
+data1[3]           1      --              --              --        -- 
+data1[4]           1      --              --              --        -- 
+data2[0]           1      --              --              --        -- 
+data2[1]           1      --              --              --        -- 
+data2[2]           1      --              --              --        -- 
+data2[3]           1      --              --              --        -- 
+data2[4]           1      --              --              --        -- 
+sel                1      --              --              --        -- 
+Cout[0]            1      --              --              --        -- 
+Cout[1]            1      --              --              --        -- 
+Cout[2]            1      --              --              --        -- 
+Cout[3]            1      --              --              --        -- 
+Cout[4]            1      --              --              --        -- 
+out1[0]            1      --              --              --        -- 
+out1[1]            1      --              --              --        -- 
+out1[2]            1      --              --              --        -- 
+out1[3]            1      --              --              --        -- 
+out1[4]            1      --              --              --        -- 
+out2[0]            1      --              --              --        -- 
+out2[1]            1      --              --              --        -- 
+out2[2]            1      --              --              --        -- 
+out2[3]            1      --              --              --        -- 
+out2[4]            1      --              --              --        -- 
+out3[0]            1      --              --              --        -- 
+out3[1]            1      --              --              --        -- 
+out3[2]            1      --              --              --        -- 
+out3[3]            1      --              --              --        -- 
+out3[4]            1      --              --              --        -- 
+
+                    Input Delay
+                  Min             Max       Related   Max
+Input Port    Rise    Fall    Rise    Fall   Clock  Fanout
+--------------------------------------------------------------------------------
+Cin1[0]       --      --      0.20    0.20  clk       --    
+Cin1[1]       --      --      0.20    0.20  clk       --    
+Cin1[2]       --      --      0.20    0.20  clk       --    
+Cin1[3]       --      --      0.20    0.20  clk       --    
+Cin1[4]       --      --      0.20    0.20  clk       --    
+Cin2[0]       --      --      0.20    0.20  clk       --    
+Cin2[1]       --      --      0.20    0.20  clk       --    
+Cin2[2]       --      --      0.20    0.20  clk       --    
+Cin2[3]       --      --      0.20    0.20  clk       --    
+Cin2[4]       --      --      0.20    0.20  clk       --    
+clk           --      --      --      --      --      -- 
+data1[0]      --      --      0.45    0.45  clk       --    
+data1[1]      --      --      0.45    0.45  clk       --    
+data1[2]      --      --      0.45    0.45  clk       --    
+data1[3]      --      --      0.45    0.45  clk       --    
+data1[4]      --      --      0.45    0.45  clk       --    
+data2[0]      --      --      0.45    0.45  clk       --    
+data2[1]      --      --      0.45    0.45  clk       --    
+data2[2]      --      --      0.45    0.45  clk       --    
+data2[3]      --      --      0.45    0.45  clk       --    
+data2[4]      --      --      0.45    0.45  clk       --    
+sel           --      --      0.40    0.40  clk       --    
+
+
+
+
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               Max Tran        Min Tran
+Input Port    Rise    Fall    Rise    Fall
+--------------------------------------------------------------------------------
+Cin1[0]       --      --      --      -- 
+Cin1[1]       --      --      --      -- 
+Cin1[2]       --      --      --      -- 
+Cin1[3]       --      --      --      -- 
+Cin1[4]       --      --      --      -- 
+Cin2[0]       --      --      --      -- 
+1
+dc_shell> write_script -out scripts/MY_DESIGN.sdc
+1
+dc_shell> write -format ddc -hier -out unmapped/MY_DESIGN.ddc
+Writing ddc file 'unmapped/MY_DESIGN.ddc'.
+1
+
