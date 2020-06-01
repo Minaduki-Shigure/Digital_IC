@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Verilog实验</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="verilog实验">Verilog实验</h1>
+<p>Copyright (c) 2020 Minaduki Shigure.<br>
+专业：电子科学与技术<br>
+学号：171180571<br>
+姓名：吴康正</p>
+<h2 id="实验源码">实验源码</h2>
+<p>限于篇幅原因，实验代码如果附在报告中则会过于臃肿，因此实验代码放在了实验报告最后的附录中，同时也可以在附件的对应目录中或者实验的<a href="https://git.nju.edu.cn/Minaduki/Digital_IC/">Git repo</a>中查看。</p>
+<h2 id="测试代码">测试代码</h2>
+<p>测试代码基本上使用的提供代码，只有秒表的代码进行了一些小修改，增加了百分之一秒的计量以准确测试。</p>
+<h2 id="测试结果">测试结果</h2>
+<p>对于提供验证文件的模块，测试通过。</p>
+<p>对于秒表模块，测试输出（部分）如下：</p>
+<pre><code class="language-plain"><code><div># 	out       =  0 0  5 9  9 5 
+# 	out       =  0 0  5 9  9 6 
+# 	out       =  0 0  5 9  9 7 
+# 	out       =  0 0  5 9  9 8 
+# 	out       =  0 0  5 9  9 9 
+# 	out       =  0 1  0 0  0 0 
+# 	out       =  0 1  0 0  0 1 
+# 	out       =  0 1  0 0  0 2 
+# 	out       =  0 1  0 0  0 3 
+# 	out       =  0 1  0 0  0 4 
+# 	out       =  0 1  0 0  0 5 
+# 	out       =  0 1  0 0  0 6 
+# 	out       =  0 1  0 0  0 7 
+# 
+# *** REACHED END OF TEST VECTORS ***
+</div></code></code></pre>
+<p>测试结果表明，模块设计正确，模块工作正常。</p>
+<h2 id="附录源码">附录：源码</h2>
+<h3 id="4位全加器">4位全加器</h3>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> adder4(
+    <span class="hljs-keyword">output</span> cout,
+    <span class="hljs-keyword">output</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] sum.
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] ina,
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] inb,
+    <span class="hljs-keyword">input</span> cin
+);
+
+    <span class="hljs-keyword">assign</span> {cout, sum} = ina + inb + cin;
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h3 id="d触发器">D触发器</h3>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> dff(
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> q,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> qn,
+    <span class="hljs-keyword">input</span> d,
+    <span class="hljs-keyword">input</span> clk,
+    <span class="hljs-keyword">input</span> set,
+    <span class="hljs-keyword">input</span> reset
+);
+
+    <span class="hljs-keyword">always</span> @ (set <span class="hljs-keyword">or</span> reset)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (!reset)
+        <span class="hljs-keyword">begin</span>
+            q = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            <span class="hljs-keyword">if</span> (!set)
+            <span class="hljs-keyword">begin</span>
+                q = <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> clk)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (set &amp;&amp; reset)
+        <span class="hljs-keyword">begin</span>
+            q = d;
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+    
+    <span class="hljs-keyword">always</span> @ *
+    <span class="hljs-keyword">begin</span>
+        qn = ~q;
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h3 id="4位计数器">4位计数器</h3>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> counter(
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] out,
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] data,
+    <span class="hljs-keyword">input</span> load,
+    <span class="hljs-keyword">input</span> reset,
+    <span class="hljs-keyword">input</span> clk
+);
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> clk)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (!reset)
+        <span class="hljs-keyword">begin</span>
+            out &lt;= <span class="hljs-number">8'b0</span>;
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            <span class="hljs-keyword">if</span> (load)
+            <span class="hljs-keyword">begin</span>
+                out &lt;= data;
+            <span class="hljs-keyword">end</span>
+            <span class="hljs-keyword">else</span>
+            <span class="hljs-keyword">begin</span>
+                out &lt;= out + <span class="hljs-number">1'b1</span>;
+            <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h3 id="4位串并转换器">4位串并转换器</h3>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> serial_pal(
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] out,
+    <span class="hljs-keyword">input</span> clk,
+    <span class="hljs-keyword">input</span> reset,
+    <span class="hljs-keyword">input</span> en,
+    <span class="hljs-keyword">input</span> in
+);
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> clk)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (reset)
+        <span class="hljs-keyword">begin</span>
+            out &lt;= <span class="hljs-number">4'b0</span>;
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            <span class="hljs-keyword">if</span> (en)
+            <span class="hljs-keyword">begin</span>
+                out &lt;= {out, in};
+            <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h3 id="8-3优先编码器">8-3优先编码器</h3>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> code_8_3(
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] din,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] dout = <span class="hljs-number">0</span>
+);
+
+    <span class="hljs-keyword">always</span> @ *
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">casex</span>(din)
+            <span class="hljs-number">8'b00000001</span>: dout &lt;= <span class="hljs-number">3'd0</span>;
+			<span class="hljs-number">8'b0000001x</span>: dout &lt;= <span class="hljs-number">3'd1</span>;
+			<span class="hljs-number">8'b000001xx</span>: dout &lt;= <span class="hljs-number">3'd2</span>;
+			<span class="hljs-number">8'b00001xxx</span>: dout &lt;= <span class="hljs-number">3'd3</span>;
+			<span class="hljs-number">8'b0001xxxx</span>: dout &lt;= <span class="hljs-number">3'd4</span>;
+			<span class="hljs-number">8'b001xxxxx</span>: dout &lt;= <span class="hljs-number">3'd5</span>;
+			<span class="hljs-number">8'b01xxxxxx</span>: dout &lt;= <span class="hljs-number">3'd6</span>;
+			<span class="hljs-number">8'b1xxxxxxx</span>: dout &lt;= <span class="hljs-number">3'd7</span>;
+            <span class="hljs-keyword">default</span>: dout &lt;= <span class="hljs-number">3'b0</span>;
+        <span class="hljs-keyword">endcase</span>
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h3 id="七段数码管译码器">七段数码管译码器</h3>
+<pre><code class="language-v"><div><span class="hljs-meta">`<span class="hljs-meta-keyword">define</span> out a, b, c, d, e, f, g</span>
+
+<span class="hljs-keyword">module</span> decoder47(
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> a,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> b,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> c,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> d,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> e,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> f,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> g,
+    <span class="hljs-keyword">input</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] din
+);
+
+    <span class="hljs-keyword">always</span> @ *
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">case</span>(din)
+        <span class="hljs-comment">// 测试文件中的数码管顺序与word文件中不一致，</span>
+        <span class="hljs-comment">// 为了方便测试，以测试文件为准</span>
+        <span class="hljs-number">7'd0</span>: {<span class="hljs-meta">`out} &lt;= 7'b111_1110;</span>
+        <span class="hljs-number">7'd1</span>: {<span class="hljs-meta">`out} &lt;= 7'b011_0000;</span>
+        <span class="hljs-number">7'd2</span>: {<span class="hljs-meta">`out} &lt;= 7'b110_1101;</span>
+        <span class="hljs-number">7'd3</span>: {<span class="hljs-meta">`out} &lt;= 7'b111_1001;</span>
+        <span class="hljs-number">7'd4</span>: {<span class="hljs-meta">`out} &lt;= 7'b011_0011;</span>
+        <span class="hljs-number">7'd5</span>: {<span class="hljs-meta">`out} &lt;= 7'b101_1011;</span>
+        <span class="hljs-number">7'd6</span>: {<span class="hljs-meta">`out} &lt;= 7'b101_1111;</span>
+        <span class="hljs-number">7'd7</span>: {<span class="hljs-meta">`out} &lt;= 7'b111_0000;</span>
+        <span class="hljs-number">7'd8</span>: {<span class="hljs-meta">`out} &lt;= 7'b111_1111;</span>
+        <span class="hljs-number">7'd9</span>: {<span class="hljs-meta">`out} &lt;= 7'b111_1011;</span>
+        <span class="hljs-keyword">endcase</span>
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+<h3 id="数字秒表">数字秒表</h3>
+<pre><code class="language-v"><div><span class="hljs-keyword">module</span> stopwatch(
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] msh,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] msl,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] sh,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] sl,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] mh,
+    <span class="hljs-keyword">output</span> <span class="hljs-keyword">reg</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] ml,
+    <span class="hljs-keyword">input</span> clk,
+    <span class="hljs-keyword">input</span> clr,
+    <span class="hljs-keyword">input</span> pause
+);
+
+    <span class="hljs-keyword">reg</span> msla, msha, sla, sha, mla, mha;
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> clk <span class="hljs-keyword">or</span> clr <span class="hljs-keyword">or</span> pause)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (clr)
+        <span class="hljs-keyword">begin</span>
+            msh &lt;= <span class="hljs-number">4'd0</span>;
+            msl &lt;= <span class="hljs-number">4'd0</span>;
+            sh &lt;= <span class="hljs-number">4'd0</span>;
+            sl &lt;= <span class="hljs-number">4'd0</span>;
+            mh &lt;= <span class="hljs-number">4'd0</span>;
+            ml &lt;= <span class="hljs-number">4'd0</span>;
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            <span class="hljs-keyword">if</span> (!pause)
+            <span class="hljs-keyword">begin</span>
+                <span class="hljs-keyword">if</span> (msl &gt;= <span class="hljs-number">9</span>)
+                <span class="hljs-keyword">begin</span>
+                    msl &lt;= <span class="hljs-number">0</span>;
+                    msla &lt;= <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">end</span>
+                <span class="hljs-keyword">else</span>
+                <span class="hljs-keyword">begin</span>
+                    msl &lt;= msl + <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">end</span>
+            <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> msla)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (msh &gt;= <span class="hljs-number">9</span>)
+        <span class="hljs-keyword">begin</span>
+            msh &lt;= <span class="hljs-number">0</span>;
+            msha &lt;= <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            msh &lt;= msh + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">end</span>
+        msla &lt;= <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> msha)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (sl &gt;= <span class="hljs-number">9</span>)
+        <span class="hljs-keyword">begin</span>
+            sl &lt;= <span class="hljs-number">0</span>;
+            sla &lt;= <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            sl &lt;= sl + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">end</span>
+        msha &lt;= <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> sla)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (sh &gt;= <span class="hljs-number">5</span>)
+        <span class="hljs-keyword">begin</span>
+            sh &lt;= <span class="hljs-number">0</span>;
+            sha &lt;= <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            sh &lt;= sh + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">end</span>
+        sla &lt;= <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> sha)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (ml &gt;= <span class="hljs-number">9</span>)
+        <span class="hljs-keyword">begin</span>
+            ml &lt;= <span class="hljs-number">0</span>;
+            mla &lt;= <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            ml &lt;= ml + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">end</span>
+        sha &lt;= <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> mla)
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (mh &gt;= <span class="hljs-number">5</span>)
+        <span class="hljs-keyword">begin</span>
+            mh &lt;= <span class="hljs-number">0</span>;
+            mha &lt;= <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">begin</span>
+            mh &lt;= mh + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">end</span>
+        mla &lt;= <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-keyword">always</span> @ (<span class="hljs-keyword">posedge</span> mha)
+    <span class="hljs-keyword">begin</span>
+        msh &lt;= <span class="hljs-number">4'd0</span>;
+        msl &lt;= <span class="hljs-number">4'd0</span>;
+        sh &lt;= <span class="hljs-number">4'd0</span>;
+        sl &lt;= <span class="hljs-number">4'd0</span>;
+        mh &lt;= <span class="hljs-number">4'd0</span>;
+        ml &lt;= <span class="hljs-number">4'd0</span>;
+        mha &lt;= <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span>
+</div></code></pre>
+
+    </body>
+    </html>

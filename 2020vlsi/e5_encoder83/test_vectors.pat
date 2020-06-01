@@ -1,0 +1,14 @@
+//TEST VECTORS FOR TESTING THE COUNTER
+//
+//THE VECTOR ORDER IS:  `inputs 
+//
+xxxxxxxx
+xxxxxxx1
+xxxxxx11
+xxxxx111
+xxxx1111
+xxx11111
+xx111111
+x1111111
+11111111
+11111111
